@@ -1,0 +1,17 @@
+{
+  "java.project.sourcePaths": ["src"],
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-24",
+      "path": "C:\\Program Files\\Java\\jdk-24",  // <--- CONFIRA esse caminho!
+      "default": true
+    }
+  ],
+  "java.configuration.javaVersion": "24",
+  "java.configuration.compilerCompliance": "24",
+  "java.debug.settings.onBuildFailureProceed": true,
+"java.project.outputPath": "bin",
+"java.project.referencedLibraries": [
+    "lib/**/*.jar"
+]
+}
