@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 public class Main {
     public static void main(String[] args) throws Exception {
         // Criação de um novo produto
-        Produto produto = new Produto("01", "Café coado", "Café tradicional coado", "4.00");
+        Produto produto = new Produto("Café coado", "Café tradicional coado", new BigDecimal("4.00"));
         produto.exibir();
     }
 }

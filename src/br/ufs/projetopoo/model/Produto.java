@@ -1,6 +1,7 @@
 package br.ufs.projetopoo.model;
 
 import br.ufs.projetopoo.utils.BigDecimalUtils;
+
 import java.math.BigDecimal;
 
 public class Produto implements Identificavel {
@@ -33,8 +34,6 @@ public class Produto implements Identificavel {
     }
 
     public void exibir(){
-
         System.out.println(this);
-
     }
 }
