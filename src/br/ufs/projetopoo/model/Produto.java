@@ -1,15 +1,17 @@
 package br.ufs.projetopoo.model;
 
 import br.ufs.projetopoo.utils.BigDecimalUtils;
+import java.math.BigDecimal;
 
-public class Produto {
+public class Produto implements Identificavel {
     private String id;
     private String nome;
     private String descricao;
-    private BigDecimalUtils preco;
+    private BigDecimal preco;
+    private static int ultimo = 1;
 
-    public Produto(String id, String nome, String descricao, BigDecimalUtils preco){
-        this.id = id;
+    public Produto(String nome, String descricao, BigDecimal preco){
+        this.id = String.format("P%04d", ultimo++);;
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
@@ -18,6 +20,21 @@ public class Produto {
     public String getId(){ return id; }
     public String getNome(){ return nome; }
     public String getDescricao(){ return descricao; }
-    public BigDecimalUtils getPreco(){  return preco; }
+    public BigDecimal getPreco(){  return preco; }
 
+    public String toString(){
+
+        return String.format(
+        "Produto  : %s\n"+
+        "Id       : %s\n"+
+        "Descrição: %s\n"+
+        "Preço  R$: %.2f\n"
+        ,nome,id,descricao,preco);
+    }
+
+    public void exibir(){
+
+        System.out.println(this);
+
+    }
 }
