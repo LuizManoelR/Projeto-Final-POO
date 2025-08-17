@@ -13,10 +13,6 @@ public class Mesa implements Identificavel {
         this.chamouGarcom = false;
     }
 
-    public String getId() {
-        return id;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -25,8 +21,8 @@ public class Mesa implements Identificavel {
         return chamouGarcom;
     }
 
-    @Override
-    public String obterId() {
+@Override
+    public String getId() {
         return this.id;
     }
 
@@ -48,6 +44,6 @@ public class Mesa implements Identificavel {
     }
 
     public void exibir() {
-        System.out.println(this.toString());
+        System.out.println(this);
     }
 }
