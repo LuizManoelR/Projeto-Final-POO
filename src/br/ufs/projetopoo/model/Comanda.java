@@ -35,6 +35,11 @@ public class Comanda implements Identificavel {
         System.out.println("Comanda " + id + " fechada. Total: R$ " + valorTotal());
     }
 
+    public void reset() {
+        pedidos.clear();
+        System.out.println("Comanda " + id + "A Comanda foi resetada e esta vazia novamente. ");
+    }
+
     @Override
     public String toString() {
         return "Comanda{id='" + id +"', pedidos=" + pedidos + "}";
