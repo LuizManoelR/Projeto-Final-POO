@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "ProdutoDAO",
+            "request": "launch",
+            "mainClass": "br.ufs.garcomeletronico.DAO.ProdutoDAO",
+            "projectName": "garcomeletronico"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-Main<garcomeletronico>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "br.ufs.garcomeletronico.app.Main",
+            "projectName": "garcomeletronico",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
