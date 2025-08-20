@@ -1,8 +1,6 @@
 package br.ufs.garcomeletronico.DAO;
 
 
-import java.math.BigDecimal;
-
 import br.ufs.garcomeletronico.model.Produto;
 
 
@@ -13,11 +11,6 @@ public class ProdutoDAO extends BaseDAO<Produto> {
 
 
     public static void main(String[] args) {
-
-        Produto produto = new Produto("Café coado", "Café tradicional coado", new BigDecimal("4.00"));
         
-        ProdutoDAO pDAO = new ProdutoDAO();
-
-        pDAO.adicionar(produto);
     }
 }
