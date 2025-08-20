@@ -1,0 +1,96 @@
+package br.ufs.garcomeletronico.model;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.math.BigDecimal;
+
+public class Pedidos{
+    private List<Mesa> mesas;
+    private String status;
+
+    public Pedidos(){
+        this.mesas = new ArrayList<>();
+        this.status = "Ativo";
+    }
+
+    public List<Mesa> getMesas(){
+        return new ArrayList<>(mesas);
+    }
+
+    public String getStatus(){
+        return status;
+    }
+
+    public void setStatus(String status){
+        this.status = status;
+    }
+
+    // Método para gerenciamento de mesas
+    public boolean addMesa(Mesa mesa){
+        if (mesa == null){
+            throw new IllegalArgumentException("Mesa não pode ser nula");
+        }
+        return this.mesas.add(mesa);
+    }
+
+    public Mesa buscarMesa(String mesaId){
+        for (Mesa mesa : mesas){
+            if(mesa.getId().equals(mesaId)){
+                return mesa;
+            }
+        }
+        return null;
+    }
+
+    public void emProducao(){
+        int contador = 0;
+
+        for (Mesa mesa : mesas){
+            for (Comanda comanda : mesa.getComandas()){
+                if ("Aberta".equals(comanda.getStatus())){
+                    comanda.setStatus("Em produção");
+                    System.out.println("Comanda " + comanda.getId() + " -  Mesa " + mesa.getId());
+                    contador++;
+                }
+            }
+        }
+        System.out.println("Total enviado: " + contador + " comandas");
+    }
+
+    public void concluidos(){
+        int contador = 0;
+        BigDecimaltotal = BigDecimal.ZERO;
+
+        for (Mesa mesa : mesas){
+            for (Comanda comanda : mesa.getComandas()){
+                if("Entregue".equals(comanda.getStatus()) && !comanda.foiFechada()){
+                    comanda.fecharComanda();
+                    total = total.add(comanda.valorTotal());
+                    contador++;
+                }
+            }
+        }
+        System.out.println("Total finalizado: " + contador + " comandas");
+        System.out.println("Valor total: R$ " + total);       
+    }
+
+    public void cancelados(){
+        int contador = 0;
+
+        for (Mesa mesa: mesas){
+            for (Comanda comanda : mesa.getComandas()){
+                if("Aberta".equals(comanda.getStatus()) || "Em produção".equals(comanda.getStatus())){
+                    System.out.println("Comanda " + comanda.getId() + " - Mesa " + mesa.getId() + 
+                                     " - Status: " + comanda.getStatus());
+                    contador++;
+                }
+            }
+        }
+    }
+
+    @Override
+    public String toString(){
+        return "Pedidos{mesas: " + mesas.size() + ", status: '" + status + "'}";
+    }
+
+}
