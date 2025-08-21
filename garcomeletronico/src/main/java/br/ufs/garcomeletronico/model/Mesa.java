@@ -1,6 +1,5 @@
 package br.ufs.garcomeletronico.model;
 
-import br.ufs.garcomeletronico.utils.BigDecimalUtils;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;

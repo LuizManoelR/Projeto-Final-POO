@@ -1,4 +1,4 @@
-package br.ufs.garcomeletronico.DAO;
+package br.ufs.garcomeletronico.dao;
 
 
 import br.ufs.garcomeletronico.model.Produto;

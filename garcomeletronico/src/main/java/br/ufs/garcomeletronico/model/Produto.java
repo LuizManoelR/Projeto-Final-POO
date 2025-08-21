@@ -1,6 +1,6 @@
 package br.ufs.garcomeletronico.model;
 
-import br.ufs.garcomeletronico.utils.BigDecimalUtils;
+
 
 import java.math.BigDecimal;
 
@@ -8,20 +8,40 @@ public class Produto implements Identificavel {
     private String id;
     private String nome;
     private String descricao;
+    private String img;
     private BigDecimal preco;
     private static int ultimo = 1;
 
-    public Produto(String nome, String descricao, BigDecimal preco){
+    public Produto(String nome, String descricao, String img ,BigDecimal preco){
         this.id = String.format("P%04d", ultimo++);;
         this.nome = nome;
         this.descricao = descricao;
+        this.img = img;
         this.preco = preco;
     }
-
+        
     public String getId(){ return id; }
     public String getNome(){ return nome; }
     public String getDescricao(){ return descricao; }
+    public String getImg(){return img;}
     public BigDecimal getPreco(){  return preco; }
+
+    public void setNome(String nome){this.nome = nome;}
+    public void setDescricao(String descricao){this.descricao = descricao;}
+    public void setImg(String img){this.img = img;}
+    public void setpreco(BigDecimal preco){this.preco = preco;}
+
+        @Override
+    public boolean equals(Object obj){
+
+        if(this == obj) return true;
+        if(obj == null || getClass() != obj.getClass()) return false;
+
+        Produto outro = (Produto) obj;
+
+        return this.getId().equals(outro.getId());
+
+    }
 
     public String toString(){
 

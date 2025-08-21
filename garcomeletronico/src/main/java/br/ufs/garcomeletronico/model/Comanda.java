@@ -1,8 +1,6 @@
 package br.ufs.garcomeletronico.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import br.ufs.garcomeletronico.utils.BigDecimalUtils;

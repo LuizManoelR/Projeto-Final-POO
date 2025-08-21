@@ -21,9 +21,33 @@ public class Item{
     public void setProduto(Produto produto){ this.produto = produto; }
     public void setQuantidade(int qtd){ this.qtd = qtd; }
 
+    public void add(){setQuantidade(getQuantidade() + 1);}
+    
+    public void remove(){
+        
+        if(getQuantidade() != 0){
+
+            setQuantidade(getQuantidade() - 1);
+
+        }return;
+    }
+
     // Cálculo do valor total
     public BigDecimal valorTotal(){
         return BigDecimalUtils.multiplicar(this.qtd, produto.getPreco());
+    }
+
+     //metodo especifico de comparação de itens
+    @Override
+    public boolean equals(Object obj){
+
+        if(this == obj) return true;
+        if(obj == null || getClass() != obj.getClass()) return false;
+
+        Item outro = (Item) obj;
+
+        return this.getProduto().equals(outro.getProduto());
+
     }
 
     public String toString(){

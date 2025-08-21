@@ -1,4 +1,4 @@
-package br.ufs.garcomeletronico.DAO;
+package br.ufs.garcomeletronico.dao;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

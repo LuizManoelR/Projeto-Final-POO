@@ -1,6 +1,5 @@
 package br.ufs.garcomeletronico.model;
 
-import br.ufs.garcomeletronico.utils.BigDecimalUtils;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,14 +7,11 @@ import java.util.List;
 public class Carrinho {
     // Atributo
     private List<Item> carrinho;
-    private String mesaId; // Conectar com Mesa
-
-    // Construtores
-    public Carrinho(){ this.carrinho = new ArrayList<>(); }
+    private Mesa mesa; // Conectar com Mesa
     
-    public Carrinho(String mesaId){
+    public Carrinho(Mesa mesa){
         this.carrinho = new ArrayList<>();
-        this.mesaId = mesaId;
+        this.mesa = mesa;
     }
 
     //Getters
@@ -23,8 +19,8 @@ public class Carrinho {
         return new ArrayList<> (this.carrinho); // Retorna cópia para encapsulamento
      }
 
-    public String getMesaId(){ return this.mesaId; }
-    public void setMesaId(String mesaId){ this.mesaId = mesaId; }
+    public Mesa getMesa(){ return this.mesa; }
+    public void setMesaId(Mesa mesa){ this.mesa = mesa; }
      
 
     // Calcular valor total do carrinho
@@ -40,18 +36,42 @@ public class Carrinho {
 
     public int size(){ return this.carrinho.size(); } // Verifica tamanho do carrinho
 
-    public void add(Item item){ this.carrinho.add(item); } // Adicionar item
+    public void add(Produto produto){ // Adicionar item 
+        
+        if(!carrinho.stream().anyMatch(item -> item.getProduto()
+                                                   .equals(produto))){
 
-    // Métodos de modificação
-    public void remove(Item item){ this.carrinho.remove(item); } //  Remover
+            this.carrinho.add(new Item(produto, 1)); 
 
-    // Remoção de item por índice
-    public void remove(int index){
-        if (index >=0 && index < carrinho.size()){
-            this.carrinho.remove(index);
+        }else buscar(produto).add();
+    }
+
+    public void remove(Produto produto){
+        
+         Item item = buscar(produto);
+            
+
+        if(item != null){
+
+            if(item.getQuantidade() == 0){
+
+                carrinho.remove(item);
+
+            }else buscar(produto).remove();
+
         }
     }
 
+    public Item buscar(Produto produto){
+
+        return carrinho.stream()
+            .filter(i -> i.getProduto().equals(produto))
+            .findFirst()
+            .orElse(null);
+
+    }
+
+    
     public void esvaziar(){ this.carrinho.clear(); }
 
     public BigDecimal pedir(){
@@ -62,58 +82,48 @@ public class Carrinho {
     }
 
     // Finalizar pedido - retorna Comanda
-    public Comanda finalizarPedido(String comandaId) {
+    public List<Item> finalizarPedido() {
+        
+        
         if (isEmpty()) {
             throw new IllegalStateException("Não é possível finalizar pedido com carrinho vazio");
+        }else{
+            
+            List<Item> lista =  new ArrayList<>(carrinho);
+
+            esvaziar();
+            
+            return lista;
+
         }
         
-        // Criar comanda com ID e transferir itens
-        Comanda comanda = new Comanda(comandaId);
-        
-        // Adicionar todos os itens do carrinho à comanda
-        for (Item item : this.carrinho) {
-            comanda.adicionarItem(item);
-        }
-        
-        BigDecimal total = getValorTotal();
-        System.out.println("Pedido finalizado! Total: R$ " + total);
-        
-        // Limpar carrinho após finalizar
-        esvaziar();
-        
-        return comanda;
     }
 
-    // Sobrecarga para gerar ID automaticamente
-    public Comanda finalizarPedido() {
-        String comandaId = gerarIdComanda();
-        return finalizarPedido(comandaId);
-    }
-
-        // Gerar ID único para comanda
-    private String gerarIdComanda() {
-        return "CMD" + System.currentTimeMillis() + (mesaId != null ? "_" + mesaId : "");
-    }
-    
-    // Método para conectar com Mesa
-    public void vincularMesa(Mesa mesa) {
-        this.mesaId = mesa.getId();
-    }
-
-    @Override
-    public String toString() {
+   @Override
+     public String toString() {
         if (carrinho.isEmpty()) { 
-            return "Carrinho vazio" + (mesaId != null ? " - Mesa: " + mesaId : ""); 
+            return "Carrinho vazio"; 
         }
 
         StringBuilder sb = new StringBuilder();
-        sb.append("Carrinho").append(mesaId != null ? " - Mesa: " + mesaId : "").append("\n");
+        sb.append("Carrinho").append(" - Mesa: " + mesa.getId()).append("\n");
         
         for (int i = 0; i < carrinho.size(); i++) {
-            sb.append(String.format("%d. %s%n", (i + 1), carrinho.get(i).toString()));
+            sb.append(String.format("%d. %s%n\n", (i + 1), carrinho.get(i).toString()));
         }
         
-        sb.append(String.format("TOTAL: R$ %.2f", getValorTotal()));
+        sb.append(String.format("TOTAL: R$ %.2f\n", getValorTotal()));
         return sb.toString();
     }
+
+    public void exibir(){System.out.println(this);}
+
+    public static void main(String[] args) {
+        
+
+
+
+    }
+
+
 }
