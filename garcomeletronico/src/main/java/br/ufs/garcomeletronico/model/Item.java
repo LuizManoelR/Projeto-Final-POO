@@ -51,10 +51,13 @@ public class Item{
     }
 
     public String toString(){
-        return String.format("%s (Qtd: %d) - Total: R$ %.2f",
-                produto.getNome(),
-                this.qtd,
-                this.valorTotal().doubleValue());
+        return String.format
+        ("Nome : %s\n"+ 
+         "   Qtd  : %d\n" + 
+         "   Total: R$ %.2f\n",
+          produto.getNome(),
+          this.qtd,
+          this.valorTotal().doubleValue());
     }
 
     // Exibição dos dados do objeto

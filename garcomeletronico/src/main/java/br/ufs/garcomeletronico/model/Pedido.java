@@ -8,8 +8,10 @@ public class Pedido implements Identificavel{
     private Mesa mesa;
     private String id;
     private PedidoStatus status;
+    private static int ultimo = 1;
 
     public Pedido(List<Item> itens, Mesa mesa){
+        this.id = String.format("PD%04d", ultimo++);
         this.itens = itens;
         this.mesa = mesa;
         this.status = PedidoStatus.PENDENTE;
@@ -38,11 +40,18 @@ public class Pedido implements Identificavel{
 
     @Override
     public String toString(){
-        return String.format(
-            "Itens : %s\n"+
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format(
             "Mesa  : %s\n"+
-            "Status: %s\n",
-            itens, getMesa().getId(), getStatus());
+            "Status: %s\n\n\n",
+            getMesa().getId(), getStatus()));
+        
+       for (int i = 0; i < itens.size(); i++) {
+            sb.append(String.format("%d. %s%n\n\n", (i + 1), itens.get(i).toString()));
+        }
+        
+        return sb.toString();
     }
 
     public void exibir(){System.out.println(this);}

@@ -13,7 +13,7 @@ public class Produto implements Identificavel {
     private static int ultimo = 1;
 
     public Produto(String nome, String descricao, String img ,BigDecimal preco){
-        this.id = String.format("P%04d", ultimo++);;
+        this.id = String.format("P%04d", ultimo++);
         this.nome = nome;
         this.descricao = descricao;
         this.img = img;
