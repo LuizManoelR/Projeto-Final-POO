@@ -4,9 +4,9 @@ import br.ufs.garcomeletronico.model.Comanda;
 
 public class ComandaDAO extends BaseDAO<Comanda> {
 
-    public ComandaDAO(){
-
-        super("garcomeletronico/src/main/resources/data/comandas.json", Comanda.class);
+    public ComandaDAO(){//impletação apartir da base abstrata
+        //path e class 
+        super("garcomeletronico/data/comandas.json", Comanda.class);
 
     }
 

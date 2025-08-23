@@ -11,26 +11,26 @@ import java.util.List;
 import br.ufs.garcomeletronico.model.Identificavel;
 import br.ufs.garcomeletronico.utils.LocalDateTimeAdapter;
 
-public abstract class BaseDAO<T extends Identificavel> {
-    private final File arquivo;
+public abstract class BaseDAO<T extends Identificavel> {//utiliza generics para permitir a reutilização em qualquer classe
+    private final File arquivo;                         // e uma interface que possui um metodo de getid 
     private final Gson gson;
     private final Type tipoLista;
     private List<T> lista;
 
     public BaseDAO(String caminhoArquivo, Class<T> tipoClasse) {
-        this.arquivo = new File(caminhoArquivo);
-        this.tipoLista = TypeToken.getParameterized(List.class, tipoClasse).getType();
+        this.arquivo = new File(caminhoArquivo);//path do arquivo
+        this.tipoLista = TypeToken.getParameterized(List.class, tipoClasse).getType();//armazena a classe que sera armazenada
 
-         this.gson = new GsonBuilder()
-            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
-            .setPrettyPrinting()
+         this.gson = new GsonBuilder()//usa Gsonbuilder para permitir compatibilidade com tipos não nativos
+            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())//utilza um adapatador para permitir a compatibilidade com datas
+            .setPrettyPrinting()//salva de forma mais legível
             .create();
 
         if (!arquivo.exists()) {
             try {
-                arquivo.getParentFile().mkdirs();
-                arquivo.createNewFile();
-                salvar(new ArrayList<>());
+                arquivo.getParentFile().mkdirs();//cria toda a cadeia de pastas do path caso não exista
+                arquivo.createNewFile();//cria o arquivo caso não exista
+                salvar(new ArrayList<>());//salva um array vazio para evitar problemas com null
             } catch (IOException e) {
                 throw new RuntimeException("Erro ao criar arquivo JSON", e);
             }
@@ -38,7 +38,7 @@ public abstract class BaseDAO<T extends Identificavel> {
         lista = listar();
     }
 
-    public List<T> listar() {
+    public synchronized List<T> listar() {//lê o arquivo e retorna sua lista de objetos
         try (Reader reader = new FileReader(arquivo)) {
             List<T> lista = gson.fromJson(reader, tipoLista);
             return lista != null ? lista : new ArrayList<>();
@@ -47,7 +47,7 @@ public abstract class BaseDAO<T extends Identificavel> {
         }
     }
 
-    public void salvar(List<T> lista) {
+    public synchronized void salvar(List<T> lista) {//sobreescreve o arquivo apartir de uma lista
         try (Writer writer = new FileWriter(arquivo)) {
             gson.toJson(lista, writer);
         } catch (IOException e) {
@@ -55,7 +55,7 @@ public abstract class BaseDAO<T extends Identificavel> {
         }
     }
 
-    public void adicionar(T obj) {
+    public synchronized void adicionar(T obj) {//adciona um objeto na lista e depois salva
         if(buscarPorCodigo(obj.getId()) == null){
 
             lista.add(obj);
@@ -64,14 +64,14 @@ public abstract class BaseDAO<T extends Identificavel> {
         }
     }
 
-    public void remover(String id){
+    public synchronized void remover(String id){//remove apartir de um id e salva
 
         lista.remove(buscarPorCodigo(id));
         salvar(lista);
     }
 
-    public T buscarPorCodigo(String codigo) {
-        return lista.stream()
+    public synchronized T buscarPorCodigo(String codigo) {//busca o primeiro da lista que tiver o codigo passado caso 
+        return lista.stream()                              //caso não encontre ele retorna null
                 .filter(obj -> obj.getId().equalsIgnoreCase(codigo))
                 .findFirst()
                 .orElse(null);

@@ -6,9 +6,10 @@ import br.ufs.garcomeletronico.model.NotaFiscal;
 
 public class NotaFiscalDAO extends BaseDAO<NotaFiscal>  {
 
-    public NotaFiscalDAO(){
+    public NotaFiscalDAO(){//impletação apartir da base abstrata
+        //path e class 
 
-        super("garcomeletronico/src/main/resources/data/notasfiscais.json", NotaFiscal.class);
+        super("garcomeletronico/data/notasfiscais.json", NotaFiscal.class);
 
     }
 
