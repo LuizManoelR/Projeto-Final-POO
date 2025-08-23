@@ -1,9 +1,10 @@
 package br.ufs.garcomeletronico.service;
 
 import br.ufs.garcomeletronico.model.*;
-import br.ufs.garcomeletronico.dto.CarrinhoDTO;
 import br.ufs.garcomeletronico.observer.CarrinhoObserver;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
@@ -12,107 +13,110 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.math.BigDecimal;
 
 @Service
 public class CarrinhoCookieService {
     
-    private ObjectMapper mapper = new ObjectMapper();
-    // Essa  lista armazena todos os observers que serão notificados
-    // quando algo acontece com o carrinho
-    private List<CarrinhoObserver> observers = new ArrayList<>();
+    private ObjectMapper mapper = new ObjectMapper(); // usado para montar/ler JDON
+    private List<CarrinhoObserver> observers = new ArrayList<>(); // lista de interessados que serãao avisados em cada ação
 
-    // Adicionar observer
-    public void adicionarObserver(CarrinhoObserver observer){
+    public void adicionarObserver(CarrinhoObserver observer) {
         observers.add(observer);
     }
 
-    // Notificar todos os observers
-    // esse método notifica todos os observers registrados que algo aconteceu
-    private void notificar(String acao, Carrinho carrinho){
-        for(CarrinhoObserver observer : observers){
-            try{
+    // chama onCarrinhoAlternado(...) em cada observer;  Exceções de um observer não interrompem os outros
+    private void notificar(String acao, Carrinho carrinho) {
+        for(CarrinhoObserver observer : observers) {
+            try {
                 observer.onCarrinhoAlterado(acao, carrinho);
-            } catch(Exception e){
+            } catch(Exception e) {
                 System.err.println("Erro ao notificar observer: " + e.getMessage());
             }
         }
     }
 
-
-    // Salvar: Carrinho → DTO → JSON → Base64 → Cookie
-    public void salvar(HttpServletResponse response, Carrinho carrinho){
-        try{
-            // Transforma o Carrinho real em um DTO com dados básicos
-            CarrinhoDTO dto = new CarrinhoDTO();
-            dto.mesaId =  carrinho.getMesa().getId();
-
-            for (Item item : carrinho.getCarrinho()){
-                CarrinhoDTO.ItemDTO itemDTO = new CarrinhoDTO.ItemDTO(
-                    item.getProduto().getId(),
-                    item.getProduto().getNome(),
-                    item.getProduto().getPreco(),
-                    item.getQuantidade()
-                );
-                dto.itens.add(itemDTO); 
+    public void salvar(HttpServletResponse response, Carrinho carrinho) {
+        try {
+            // Criar objeto JSON diretamente
+            ObjectNode rootNode = mapper.createObjectNode();
+            rootNode.put("mesaId", carrinho.getMesa().getId()); // contém mesaId e um vetor de itens
+            
+            ArrayNode itensArray = rootNode.putArray("itens");
+            
+            for (Item item : carrinho.getCarrinho()) { // Para cada item do carrinho, cria-se um itemNode
+                ObjectNode itemNode = mapper.createObjectNode();
+                itemNode.put("id", item.getProduto().getId());
+                itemNode.put("nome", item.getProduto().getNome());
+                itemNode.put("preco", item.getProduto().getPreco());
+                itemNode.put("quantidade", item.getQuantidade());
+                itensArray.add(itemNode);
             }
 
-            //  DTO -> JSON -> Base64
-            String json = mapper.writeValueAsString(dto); // Converte de DTO em JSON
-            String encoded = Base64.getEncoder().encodeToString(json.getBytes()); // JSON para Base64
+            /*
+             * Exemplo gerado:
+             * {
+                "mesaId": "MESA-123",
+                "itens": [
+                    {"id":"P01","nome":"Refrigerante","preco":6.50,"quantidade":2},
+                    {"id":"P02","nome":"Hambúrguer","preco":25.00,"quantidade":1}
+                ]
+                }
+             */
 
-            // Criar cookie chamada "carrinho"
+            String json = mapper.writeValueAsString(rootNode);
+            String encoded = Base64.getEncoder().encodeToString(json.getBytes());
+
             Cookie cookie = new Cookie("carrinho", encoded);
-            cookie.setMaxAge(7*24*60*60); // 7 dias
+            cookie.setMaxAge(7*24*60*60);
             cookie.setPath("/");
             cookie.setHttpOnly(true);
-            // Adiciona o cookie na resposta
-            response.addCookie(cookie); // navegador grava o cookie no cliente
+            response.addCookie(cookie); // envia o cookie ao cliente
             notificar("SALVO", carrinho);
 
-        } catch (Exception e){
+        } catch (Exception e) {
             System.err.println("Erro ao salvar cookie: " + e.getMessage());
             notificar("ERRO AO SALVAR", carrinho);
         }
     }
 
-        // Carregar: Cookie → Base64 → JSON → DTO → Carrinho reconstruído.
-        public Carrinho carregar(HttpServletRequest request, Mesa mesa) {
-            Carrinho carrinho = new Carrinho(mesa); // cria um novo carrinho vazio
-            
-            try {
-                Cookie[] cookies = request.getCookies(); // pega os cookies da requisição
-                if (cookies != null){
-                    for (Cookie cookie : cookies) {
-                        if ("carrinho".equals(cookie.getName())) {
+    public Carrinho carregar(HttpServletRequest request, Mesa mesa) {
+        Carrinho carrinho = new Carrinho(mesa); // cria um carrinho vazio para a Mesa recebida como argumento
+        try {
+            Cookie[] cookies = request.getCookies(); // Lê os cookies da requisição
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if ("carrinho".equals(cookie.getName())) {
+                        String decoded = new String(Base64.getDecoder().decode(cookie.getValue()));
+                        ObjectNode rootNode = (ObjectNode) mapper.readTree(decoded);
+                        
+                        ArrayNode itensArray = (ArrayNode) rootNode.get("itens");
+                        for (int i = 0; i < itensArray.size(); i++) {
+                            ObjectNode itemNode = (ObjectNode) itensArray.get(i);
                             
-                            // 1. Base64 → JSON → DTO
-                            String decoded = new String(Base64.getDecoder().decode(cookie.getValue()));
-                            CarrinhoDTO dto = mapper.readValue(decoded, CarrinhoDTO.class);
+                            String id = itemNode.get("id").asText();
+                            String nome = itemNode.get("nome").asText();
+                            BigDecimal preco = new BigDecimal(itemNode.get("preco").asText());
+                            int quantidade = itemNode.get("quantidade").asInt();
                             
-                            // 2. DTO → Carrinho
-                            for (CarrinhoDTO.ItemDTO itemDTO : dto.itens) {
-                                // Recriar produto com dados salvos
-                                Produto produto = new Produto(itemDTO.id, itemDTO.nome, "", itemDTO.preco);
-                                // Adicionar na quantidade correta
-                                for (int i = 0; i < itemDTO.quantidade; i++) {
-                                    carrinho.add(produto);
-                                }
+                            Produto produto = new Produto(id, nome, "", preco); // reconstroi Produto
+                            for (int j = 0; j < quantidade; j++) {
+                                carrinho.add(produto);
                             }
-                            break;
                         }
+                        break;
                     }
-                } 
-                notificar("CARREGADO", carrinho);
-            } catch (Exception e) {
-                System.err.println("Erro ao carregar cookie: " + e.getMessage());
-                notificar("ERRO AO CARREGAR", carrinho);
+                }
             }
-            
-            return carrinho;
+            notificar("CARREGADO", carrinho);
+        } catch (Exception e) {
+            System.err.println("Erro ao carregar cookie: " + e.getMessage());
+            notificar("ERRO AO CARREGAR", carrinho);
+        }
+        
+        return carrinho;
     }
 
-    
-    // Limpar: Cria cookie vazio com MaxAge=0 → navegador apaga.
     public void limpar(HttpServletResponse response) {
         Cookie cookie = new Cookie("carrinho", "");
         cookie.setMaxAge(0);
