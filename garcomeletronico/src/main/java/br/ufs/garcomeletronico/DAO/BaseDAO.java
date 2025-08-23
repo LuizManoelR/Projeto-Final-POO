@@ -69,6 +69,18 @@ public abstract class BaseDAO<T extends Identificavel> {//utiliza generics para 
         lista.remove(buscarPorCodigo(id));
         salvar(lista);
     }
+    public synchronized void remover(List<T> objs){//remove apartir de uma lista de objetos e salva
+
+        for(T obj: objs){
+            
+            String id = obj.getId();
+
+            lista.remove(buscarPorCodigo(id));
+
+        }
+
+        salvar(lista);
+    }
 
     public synchronized T buscarPorCodigo(String codigo) {//busca o primeiro da lista que tiver o codigo passado caso 
         return lista.stream()                              //caso não encontre ele retorna null
