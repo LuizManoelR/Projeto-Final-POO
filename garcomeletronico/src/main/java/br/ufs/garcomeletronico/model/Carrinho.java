@@ -20,7 +20,7 @@ public class Carrinho {
      }
 
     public Mesa getMesa(){ return this.mesa; }
-    public void setMesaId(Mesa mesa){ this.mesa = mesa; }
+    public void setMesa(Mesa mesa){ this.mesa = mesa; }
      
 
     // Calcular valor total do carrinho
