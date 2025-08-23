@@ -5,9 +5,10 @@ import br.ufs.garcomeletronico.model.Mesa;
 
 public class MesaDAO extends BaseDAO<Mesa>{
 
-        public MesaDAO(){
+        public MesaDAO(){//impletação apartir da base abstrata
+        //path e class 
 
-        super("garcomeletronico/src/main/resources/data/mesas.json", Mesa.class);
+        super("garcomeletronico/data/mesas.json", Mesa.class);
 
     }
     

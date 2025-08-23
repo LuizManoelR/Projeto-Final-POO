@@ -20,7 +20,7 @@ public class Carrinho {
      }
 
     public Mesa getMesa(){ return this.mesa; }
-    public void setMesaId(Mesa mesa){ this.mesa = mesa; }
+    public void setMesa(Mesa mesa){ this.mesa = mesa; }
      
 
     // Calcular valor total do carrinho
@@ -79,24 +79,6 @@ public class Carrinho {
         System.out.println("Pedido feito! Total: R$ " + total);
         esvaziar();
         return total;
-    }
-
-    // Finalizar pedido - retorna Comanda
-    public List<Item> finalizarPedido() {
-        
-        
-        if (isEmpty()) {
-            throw new IllegalStateException("Não é possível finalizar pedido com carrinho vazio");
-        }else{
-            
-            List<Item> lista =  new ArrayList<>(carrinho);
-
-            esvaziar();
-            
-            return lista;
-
-        }
-        
     }
 
    @Override
