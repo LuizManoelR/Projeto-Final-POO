@@ -81,24 +81,6 @@ public class Carrinho {
         return total;
     }
 
-    // Finalizar pedido - retorna Comanda
-    public List<Item> finalizarPedido() {
-        
-        
-        if (isEmpty()) {
-            throw new IllegalStateException("Não é possível finalizar pedido com carrinho vazio");
-        }else{
-            
-            List<Item> lista =  new ArrayList<>(carrinho);
-
-            esvaziar();
-            
-            return lista;
-
-        }
-        
-    }
-
    @Override
      public String toString() {
         if (carrinho.isEmpty()) { 
