@@ -1,0 +1,26 @@
+[
+  {
+    "id": "P0001",
+    "nome": "Café coado",
+    "descricao": "Café tradicional coado",
+    "categoria": "BEBIDA",
+    "img": "garcomeletronico/src/main/resources/static/img/P0001.png",
+    "preco": 4.00
+  },
+  {
+    "id": "P0002",
+    "nome": "Café espresso",
+    "descricao": "Café tradicional espresso",
+    "categoria": "BEBIDA",
+    "img": "garcomeletronico/src/main/resources/static/img/P0002.png",
+    "preco": 4.00
+  },
+  {
+    "id": "P0003",
+    "nome": "Café latte",
+    "descricao": "Café tradicional latte",
+    "categoria": "BEBIDA",
+    "img": "garcomeletronico/src/main/resources/static/img/P0003.png",
+    "preco": 4.00
+  }
+]
