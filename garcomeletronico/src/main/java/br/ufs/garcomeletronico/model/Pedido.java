@@ -1,6 +1,6 @@
 package br.ufs.garcomeletronico.model;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class Pedido implements Identificavel{
@@ -18,7 +18,12 @@ public class Pedido implements Identificavel{
     }
 
     public List<Item> getItens(){
-        return new ArrayList<>(itens);
+        
+        List<Item> itenscpy = itens.stream()
+            .map(i -> new Item(i.getProduto(), i.getQuantidade()))
+            .toList();
+
+        return itenscpy; //  Retorna cópia para encapsulamento
     }
 
     public String getStatus(){
@@ -43,6 +48,7 @@ public class Pedido implements Identificavel{
         
         StringBuilder sb = new StringBuilder();
         sb.append(String.format(
+            "======== PEDIDO =======\n"+
             "Mesa  : %s\n"+
             "Status: %s\n\n\n",
             getMesa().getId(), getStatus()));

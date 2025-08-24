@@ -16,7 +16,12 @@ public class Carrinho {
 
     //Getters
     public List<Item> getCarrinho(){ 
-        return new ArrayList<> (this.carrinho); // Retorna cópia para encapsulamento
+        
+        List<Item> carrinhocpy = carrinho.stream()
+            .map(i -> new Item(i.getProduto(), i.getQuantidade()))
+            .toList();
+        
+        return carrinhocpy; // Retorna cópia para encapsulamento
      }
 
     public Mesa getMesa(){ return this.mesa; }
@@ -88,7 +93,7 @@ public class Carrinho {
         }
 
         StringBuilder sb = new StringBuilder();
-        sb.append("Carrinho").append(" - Mesa: " + mesa.getId()).append("\n");
+        sb.append("======== CARRINHO =======\n").append("Mesa: " + mesa.getId()).append("\n");
         
         for (int i = 0; i < carrinho.size(); i++) {
             sb.append(String.format("%d. %s%n\n", (i + 1), carrinho.get(i).toString()));

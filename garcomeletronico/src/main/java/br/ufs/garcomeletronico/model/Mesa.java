@@ -48,7 +48,8 @@ public class Mesa implements Identificavel {
     @Override
     public String toString() {
         return String.format
-        ("Mesa         : %s\n"+ 
+        ("======== MESA =======\n"+
+         "Mesa         : %s\n"+ 
          "Status       : %s\n" + 
          "Chamou Garçom: %s\n",
           getId(),

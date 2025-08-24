@@ -3,6 +3,8 @@ package br.ufs.garcomeletronico.model;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import br.ufs.garcomeletronico.utils.BigDecimalUtils;
 
 public class Comanda implements Identificavel {
@@ -15,7 +17,7 @@ public class Comanda implements Identificavel {
     
         this.id = String.format("%04d", ultimo++);
         pedidos = new ArrayList<>();
-        state = new ComandaFechada();
+        state = new ComandaLivre();
 
     }
 
@@ -33,7 +35,12 @@ public class Comanda implements Identificavel {
     // um retorna uma cópia da lista e o outro a lista original, respectivamente
 
     public List<Item> getPedidos(){
-        return new ArrayList<>(pedidos); //  Retorna cópia para encapsulamento
+        
+        List<Item> pedidoscpy = pedidos.stream()
+            .map(i -> new Item(i.getProduto(), i.getQuantidade()))
+            .collect(Collectors.toCollection(ArrayList::new));
+
+        return pedidoscpy; //  Retorna cópia para encapsulamento
     }
 
     @Override
@@ -43,19 +50,36 @@ public class Comanda implements Identificavel {
 
     public String getStatus(){ return state.getStatus(); }
 
-    // Métodos que delegam para o estado atual
-    public void adicionarItem(List<Item> itens) {
-        state.adicionarItem(this, itens);
+        public Item buscar(Produto produto){
+
+        return pedidos.stream()
+            .filter(i -> i.getProduto().equals(produto))
+            .findFirst()
+            .orElse(null);
+
     }
 
-    public void removerItem(List<Item>  item){
+    // Métodos que delegam para o estado atual
+    public void adicionarItem(List<Item> itens) {
+        state.adicionarItem(this,itens);
+    }
+
+    public void removerItem(Produto produto){
         
-        state.removerItem(this, item);
+        state.removerItem(this, produto);
 
     }
 
     public void fecharComanda(){
         state.fecharComanda(this);
+    }
+   
+    public void abrirComanda(){
+        state.abrirComanda(this);
+    }
+
+    public void resetComanda(){
+        state.resetComanda(this);
     }
 
     public BigDecimal valorTotal() {
@@ -71,12 +95,20 @@ public class Comanda implements Identificavel {
     public boolean isEmpty(){ return pedidos.isEmpty(); }
 
 
-     @Override
-    public String toString() {
+    @Override
+    public String toString(){
+        
         StringBuilder sb = new StringBuilder();
+        sb.append(String.format(
+            "======== COMANDA =======\n"+
+            "Id  : %s\n"+
+            "Status: %s\n\n\n",
+            id, getStatus()));
         
-    
-        
+       for (int i = 0; i < pedidos.size(); i++) {
+            sb.append(String.format("%d. %s%n\n\n", (i + 1), pedidos.get(i).toString()));
+        }
+        sb.append(String.format("Valor Total: %.2f\n", valorTotal()));
         
         return sb.toString();
     }
