@@ -9,8 +9,8 @@ import br.ufs.garcomeletronico.utils.BigDecimalUtils;
 
 public class Comanda implements Identificavel {
     private String id;
-    private List<Item> pedidos;
     private ComandaState state; //Estado atual
+    private List<Item> pedidos;
     private static int ultimo = 1;
 
     public Comanda(){

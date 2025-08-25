@@ -8,7 +8,10 @@ import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import br.ufs.garcomeletronico.model.ComandaState;
 import br.ufs.garcomeletronico.model.Identificavel;
+import br.ufs.garcomeletronico.utils.ComandaStateAdapter;
 import br.ufs.garcomeletronico.utils.LocalDateTimeAdapter;
 
 public abstract class BaseDAO<T extends Identificavel> {//utiliza generics para permitir a reutilização em qualquer classe
@@ -23,6 +26,7 @@ public abstract class BaseDAO<T extends Identificavel> {//utiliza generics para 
 
          this.gson = new GsonBuilder()//usa Gsonbuilder para permitir compatibilidade com tipos não nativos
             .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())//utilza um adapatador para permitir a compatibilidade com datas
+            .registerTypeAdapter(ComandaState.class, new ComandaStateAdapter())//utilza um adapatador para permitir a compatibilidade com a Comanda
             .setPrettyPrinting()//salva de forma mais legível
             .create();
 
@@ -87,5 +91,17 @@ public abstract class BaseDAO<T extends Identificavel> {//utiliza generics para 
                 .filter(obj -> obj.getId().equalsIgnoreCase(codigo))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public synchronized int buscarIndex(String codigo){
+        
+        for(int i = 0; i < lista.size(); i++){
+            
+            if(lista.get(i).equals(buscarPorCodigo(codigo))){
+                return i;
+            }
+            
+        }return -1;
+
     }
 }
