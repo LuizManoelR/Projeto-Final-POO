@@ -51,19 +51,15 @@ public class Carrinho {
         }else buscar(produto).add();
     }
 
-    public void remove(Produto produto){
-        
-         Item item = buscar(produto);
-            
+    public void remove(Produto produto) {
+        Item item = buscar(produto);
 
-        if(item != null){
+        if (item != null) {
+            item.remove(); // decrementa a quantidade
 
-            if(item.getQuantidade() == 0){
-
-                carrinho.remove(item);
-
-            }else buscar(produto).remove();
-
+            if (item.getQuantidade() <= 0) {
+                carrinho.remove(item); // remove da lista quando não há mais unidades
+            }
         }
     }
 

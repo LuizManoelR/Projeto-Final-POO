@@ -60,7 +60,7 @@ public class CarrinhoController {
         ProdutoDAO produtoDAO = new ProdutoDAO();
                                 
         Produto produto = produtoDAO.buscarPorCodigo(produtoId); 
-        carrinhoService.adcionar(request, response, produto);
+        carrinhoService.adicionar(request, response, produto);
     }
 
     // Remove produto do carrinho

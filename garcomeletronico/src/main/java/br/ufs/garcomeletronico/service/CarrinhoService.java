@@ -35,7 +35,7 @@ public class CarrinhoService {
 
     }
 
-    public void adcionar(HttpServletRequest request,HttpServletResponse response,Produto produto){
+    public void adicionar(HttpServletRequest request,HttpServletResponse response,Produto produto){
 
         Carrinho carrinho = carrinhoCookieService.carregar(request);
 
