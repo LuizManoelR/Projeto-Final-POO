@@ -18,6 +18,7 @@ import br.ufs.garcomeletronico.model.Item;
 import br.ufs.garcomeletronico.model.Mesa;
 import br.ufs.garcomeletronico.model.Produto;
 import br.ufs.garcomeletronico.service.CarrinhoService;
+import br.ufs.garcomeletronico.service.ComandaService;
 
 
 @RestController
@@ -25,10 +26,12 @@ import br.ufs.garcomeletronico.service.CarrinhoService;
 public class CarrinhoController {
 
     private CarrinhoService carrinhoService;
+    private ComandaService comandaService;
 
-    public CarrinhoController(CarrinhoService carrinhoService){
+    public CarrinhoController(CarrinhoService carrinhoService,ComandaService comandaService){
 
         this.carrinhoService = carrinhoService;
+        this.comandaService = comandaService;
 
     }
 
@@ -86,11 +89,11 @@ public class CarrinhoController {
     }
 
     // Finaliza o carrinho virando comanda/pedido
-    @PostMapping("/finalizar/{comandaId}")
-    public void finalizarCarrinho(@PathVariable String comandaId,
-                                  HttpServletRequest request,
+    @PostMapping("/finalizar")
+    public void finalizarCarrinho(HttpServletRequest request,
                                   HttpServletResponse response) {
         
+        String comandaId = comandaService.resgatarId(request);
 
         carrinhoService.finalizar(request, response, comandaId);
     }

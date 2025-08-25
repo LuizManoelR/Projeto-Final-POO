@@ -91,7 +91,7 @@ public class Comanda implements Identificavel {
     }
 
     public int quantidadeItens(){ return pedidos.size(); }
-
+    
     public boolean isEmpty(){ return pedidos.isEmpty(); }
 
 
@@ -111,6 +111,17 @@ public class Comanda implements Identificavel {
         sb.append(String.format("Valor Total: %.2f\n", valorTotal()));
         
         return sb.toString();
+    }
+   @Override
+    public boolean equals(Object obj){
+
+        if(this == obj) return true;
+        if(obj == null || getClass() != obj.getClass()) return false;
+
+        Comanda outro = (Comanda) obj;
+
+        return this.getId().equals(outro.getId());
+
     }
 
     public void exibir() {

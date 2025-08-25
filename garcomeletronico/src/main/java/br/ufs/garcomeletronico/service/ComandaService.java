@@ -8,13 +8,19 @@ import br.ufs.garcomeletronico.dao.ComandaDAO;
 import br.ufs.garcomeletronico.dao.ProdutoDAO;
 import br.ufs.garcomeletronico.model.Comanda;
 import br.ufs.garcomeletronico.model.Item;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Service
 public class ComandaService {
 
     private ComandaDAO comandaDAO;
+    private ComandaCookieService comandaCookieService;
 
-    public ComandaService(){comandaDAO = new ComandaDAO();}
+    public ComandaService(ComandaCookieService comandaCookieService){
+        comandaDAO = new ComandaDAO();
+        this.comandaCookieService = comandaCookieService;
+    }
 
     public void criar(){
 
@@ -64,6 +70,9 @@ public class ComandaService {
 
         List<Comanda> cmds = comandaDAO.listar();
         int index = comandaDAO.buscarIndex(id);
+        if (index == -1) {
+            throw new RuntimeException("Comanda não encontrada: " + id);
+        }
         Comanda c = cmds.get(index);
         c.abrirComanda();
         comandaDAO.salvar(cmds);
@@ -90,6 +99,35 @@ public class ComandaService {
      
         return c;
 
+    }
+
+    public void iniciar(HttpServletResponse response){
+
+        Comanda livre = buscarLivre();
+            if (livre == null) {
+                System.err.println("Nenhuma comanda livre disponível.");
+                return; // ou lançar uma exceção
+            }
+
+            comandaCookieService.salvar(response, livre.getId());
+            System.out.println("Comanda iniciada: " + livre.getId());
+
+    }
+    public void limpar(HttpServletResponse response){
+        comandaCookieService.limpar(response);
+    }
+
+    public String resgatarId(HttpServletRequest request){
+
+        return comandaCookieService.resgatar(request);
+
+    }
+
+    public Comanda buscar(HttpServletRequest request){
+
+        String id = resgatarId(request);
+
+        return comandaDAO.buscarPorCodigo(id);
     }
     
 }
