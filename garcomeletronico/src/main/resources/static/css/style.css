@@ -1,7 +1,7 @@
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #fafafa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f6f8;
     color: #333;
 }
 
@@ -9,120 +9,174 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #fff;
-    padding: 10px 15px;
-    border-bottom: 2px solid #ccc;
+    background: linear-gradient(90deg, #4caf50, #66bb6a);
+    padding: 12px 20px;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 .topbar .brand {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 22px;
+}
+.topbar .search {
+    flex: 1;
+    margin: 0 15px;
+    display: flex;
 }
 .topbar .search input {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    flex: 1;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+}
+.topbar .search button {
+    padding: 6px 12px;
+    border: none;
+    background: #2e7d32;
+    color: white;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.topbar .search button:hover {
+    background: #1b5e20;
 }
 .topbar .mesa {
     font-weight: bold;
-    color: green;
+    color: #fff;
 }
 .topbar .cart {
-    font-size: 18px;
-    color: green;
+    position: relative;
+    font-size: 20px;
+    cursor: pointer;
+}
+.topbar .cart span {
+    position: absolute;
+    top: -8px;
+    right: -12px;
+    background: #f44336;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+    border: 1px solid #fff;
 }
 
 .layout {
     display: flex;
+    min-height: calc(100vh - 60px);
 }
+
 .sidebar {
-    width: 180px;
-    background: #f0f0f0;
-    padding: 15px;
+    width: 200px;
+    background: #fff;
+    padding: 20px;
     border-right: 2px solid #ddd;
+    flex-shrink: 0;
 }
 .sidebar a {
     display: block;
-    padding: 8px;
-    margin-bottom: 5px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
     text-decoration: none;
-    color: #064420;
+    color: #2e7d32;
     font-weight: bold;
+    border-radius: 6px;
+    transition: background 0.3s, transform 0.2s;
 }
 .sidebar a.active,
 .sidebar a:hover {
-    background: #c8e6c9;
-    border-radius: 4px;
+    background: #a5d6a7;
+    transform: translateX(4px);
 }
 
 .content {
     flex: 1;
-    padding: 20px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
 }
 
 .card {
     display: flex;
     align-items: center;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    padding: 10px;
-    background: #fff;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: linear-gradient(145deg, #ffffff, #e8f5e9);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
 .card img.thumb {
-    width: 80px;
-    height: 80px;
+    width: 130px;
+    height: 130px;
     object-fit: cover;
-    border-radius: 6px;
-    margin-right: 15px;
+    border-radius: 12px;
+    margin-right: 20px;
+    border: 2px solid #c8e6c9;
 }
 .card .info {
     flex: 1;
 }
 .card .info h3 {
-    margin: 0;
-    font-size: 18px;
+    margin: 0 0 8px 0;
+    font-size: 20px;
 }
 .card .info .desc {
     font-size: 14px;
-    color: #666;
+    color: #555;
 }
 .card .price {
     font-weight: bold;
-    color: green;
+    color: #2e7d32;
     margin-right: 15px;
+    min-width: 70px;
+    text-align: right;
 }
 .card .add button {
-    background: #4CAF50;
+    background: #4caf50;
     border: none;
     color: white;
-    font-size: 20px;
-    padding: 5px 10px;
+    font-size: 22px;
+    padding: 10px 14px;
     border-radius: 50%;
     cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
 }
 .card .add button:hover {
-    background: #388e3c;
+    background: #1b5e20;
+    transform: scale(1.1);
 }
 
 .cart-summary {
     margin-top: 30px;
-    padding: 15px;
-    border: 2px solid #4CAF50;
-    border-radius: 8px;
-    background: #f9fff9;
+    padding: 25px;
+    border-radius: 12px;
+    background: #f1f8e9;
+    border: 2px solid #4caf50;
 }
 .cart-summary h2 {
     margin-top: 0;
     color: #2e7d32;
+    font-size: 22px;
 }
 .cart-summary table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
+    margin-top: 12px;
 }
 .cart-summary th,
 .cart-summary td {
-    padding: 8px;
+    padding: 10px;
     border-bottom: 1px solid #ddd;
     text-align: left;
 }
@@ -130,12 +184,14 @@ body {
     background: #f44336;
     color: white;
     border: none;
-    padding: 3px 8px;
-    border-radius: 4px;
+    padding: 5px 10px;
+    border-radius: 6px;
     cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
 }
 .cart-summary td form button:hover {
-    background: #c62828;
+    background: #b71c1c;
+    transform: scale(1.1);
 }
 .cart-summary .total {
     margin-top: 15px;
@@ -146,11 +202,37 @@ body {
     color: #2e7d32;
 }
 
-.card img.thumb {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-right: 15px;
-    border: 2px solid #ddd;
+@media (max-width: 900px) {
+    .layout {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid #ddd;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    .sidebar a {
+        flex: 1 1 calc(33% - 10px);
+        text-align: center;
+        margin-bottom: 5px;
+    }
+    .card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .card img.thumb {
+        margin-bottom: 12px;
+        width: 100%;
+        height: auto;
+    }
+    .card .price {
+        text-align: left;
+        margin: 10px 0;
+    }
+    .topbar .search {
+        margin: 10px 0;
+    }
 }

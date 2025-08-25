@@ -39,6 +39,7 @@ public class CardapioService {
 
     }
     
+    public List<Produto> listarTodos(){return produtoDAO.listar();}
     public List<Produto> listEntradas(){return filtrarCategoria("ENTRADA");}
     public List<Produto> listPratosPrincipais(){return filtrarCategoria("PRATOPRINCIPAL");}
     public List<Produto> listBebidas(){return filtrarCategoria("BEBIDA");}
