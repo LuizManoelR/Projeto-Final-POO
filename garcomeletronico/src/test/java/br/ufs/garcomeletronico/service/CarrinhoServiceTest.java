@@ -34,9 +34,11 @@ class CarrinhoServiceTest {
 
     @BeforeEach
     void setup(){
+        // Antes de cada teste, criamos mocks das dependências usando Mockito
         carrinhoCookieService = mock(CarrinhoCookieService.class);
         pedidoService = mock(PedidoService.class);
         comandaService = mock(ComandaService.class);
+        // Criar uma instância real do CarrinhoService, injetando os mocks
         carrinhoService = new CarrinhoService(carrinhoCookieService, pedidoService, comandaService);
 
         request = mock(HttpServletRequest.class);
@@ -48,15 +50,16 @@ class CarrinhoServiceTest {
         Mesa mesa = new Mesa();
         carrinhoService.iniciar(response, mesa);
         // verifica se salvar foi chamado
-        verify(carrinhoCookieService).salvar(any(HttpServletResponse.class), any(Carrinho.class));
+        verify(carrinhoCookieService).salvar(any(HttpServletResponse.class), any(Carrinho.class)); // any() é usado para dizer que qualquer objeto desse tipo é aceitável
     }
 
     @Test
     void deveAdicionarProdutoAoCarrinho(){
         Produto produto = new Produto("Café",  "desc", "BEBIDA", BigDecimal.valueOf(2.5));
         Carrinho carrinho = new Carrinho(new Mesa());
-    
-        when(carrinhoCookieService.carregar(request)).thenReturn(carrinho); // mock do carrinho
+
+        // when().thenReturn(): Define comportamento do mock
+        when(carrinhoCookieService.carregar(request)).thenReturn(carrinho); // mock do método carregar p/ retornar carrinho vazio
 
         carrinhoService.adicionar(request, response, produto);
 
@@ -86,7 +89,7 @@ class CarrinhoServiceTest {
         carrinhoService.remover(request, response, produto);
 
         // Assert
-        // Como só tinha 1 unidade, o produto deve ter sido removido da lista
+        // Verifica se o carrinho ficou vazio e se salvar() foi chamado
         assertTrue(carrinho.getCarrinho().isEmpty(), "Carrinho deve ficar vazio após remover o produto");
         verify(carrinhoCookieService).salvar(response, carrinho);
     }
