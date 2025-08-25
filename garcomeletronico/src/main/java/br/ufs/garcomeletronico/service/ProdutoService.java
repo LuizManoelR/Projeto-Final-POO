@@ -22,8 +22,7 @@ public class ProdutoService {
 
         if(_preco.floatValue() > 0){
 
-            Produto produto = new Produto(nome, descricao, categoria,_preco);
-            produtoDAO.adicionar(produto);
+            produtoDAO.adicionar(new Produto(nome, descricao, categoria,_preco));
 
         }else throw new IllegalArgumentException("Preço deve ser maior que zero");
 

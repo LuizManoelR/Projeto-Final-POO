@@ -18,7 +18,7 @@ public abstract class BaseDAO<T extends Identificavel> {//utiliza generics para 
     private final File arquivo;                         // e uma interface que possui um metodo de getid 
     private final Gson gson;
     private final Type tipoLista;
-    private List<T> lista;
+    protected List<T> lista;
 
     public BaseDAO(String caminhoArquivo, Class<T> tipoClasse) {
         this.arquivo = new File(caminhoArquivo);//path do arquivo
