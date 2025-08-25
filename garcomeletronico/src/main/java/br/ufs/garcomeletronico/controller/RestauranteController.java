@@ -40,13 +40,13 @@ public class RestauranteController {
 
 
         List<Item> itens = (categoria == null || categoria.isEmpty()) 
-                ? cardapioService.listarItens() 
-                : cardapioService.listarPorCategoria(categoria);
+                ? cardapioService.listarTodos();
+                : cardapioService.filtrarCategoria(categoria);
 
         if (q != null && !q.isEmpty()) {
             String busca = q.toLowerCase();
             itens = itens.stream()
-                    .filter(i -> i.getNome().toLowerCase().contains(busca))
+                    .filter(i -> i.getProduto().get().toLowerCase().contains(busca))
                     .collect(Collectors.toList());
         }
 
