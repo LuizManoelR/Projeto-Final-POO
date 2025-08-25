@@ -44,6 +44,8 @@ public class CardapioService {
     public List<Produto> listBebidas(){return filtrarCategoria("BEBIDA");}
     public List<Produto> listSobremesa(){return filtrarCategoria("SOBREMESA");}
 
+    public List<Produto> listarProdutos() {
+    return cardapio.listar();
+    }
 
-    
 }
