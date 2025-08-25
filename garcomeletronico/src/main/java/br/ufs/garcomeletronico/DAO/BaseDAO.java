@@ -39,7 +39,11 @@ public abstract class BaseDAO<T extends Identificavel> {//utiliza generics para 
                 throw new RuntimeException("Erro ao criar arquivo JSON", e);
             }
         }
-        lista = listar();
+        atualizarLista();
+    }
+
+    private void atualizarLista() {
+    lista = listar();
     }
 
     public synchronized List<T> listar() {//lê o arquivo e retorna sua lista de objetos
@@ -60,6 +64,7 @@ public abstract class BaseDAO<T extends Identificavel> {//utiliza generics para 
     }
 
     public synchronized void adicionar(T obj) {//adciona um objeto na lista e depois salva
+            atualizarLista();
         if(buscarPorCodigo(obj.getId()) == null){
 
             lista.add(obj);
@@ -69,12 +74,12 @@ public abstract class BaseDAO<T extends Identificavel> {//utiliza generics para 
     }
 
     public synchronized void remover(String id){//remove apartir de um id e salva
-
+        atualizarLista();
         lista.remove(buscarPorCodigo(id));
         salvar(lista);
     }
     public synchronized void remover(List<T> objs){//remove apartir de uma lista de objetos e salva
-
+        atualizarLista();
         for(T obj: objs){
             
             String id = obj.getId();
@@ -87,6 +92,7 @@ public abstract class BaseDAO<T extends Identificavel> {//utiliza generics para 
     }
 
     public synchronized T buscarPorCodigo(String codigo) {//busca o primeiro da lista que tiver o codigo passado caso 
+        atualizarLista();
         return lista.stream()                              //caso não encontre ele retorna null
                 .filter(obj -> obj.getId().equalsIgnoreCase(codigo))
                 .findFirst()
@@ -94,7 +100,7 @@ public abstract class BaseDAO<T extends Identificavel> {//utiliza generics para 
     }
 
     public synchronized int buscarIndex(String codigo){
-        
+        atualizarLista();
         for(int i = 0; i < lista.size(); i++){
             
             if(lista.get(i).equals(buscarPorCodigo(codigo))){
