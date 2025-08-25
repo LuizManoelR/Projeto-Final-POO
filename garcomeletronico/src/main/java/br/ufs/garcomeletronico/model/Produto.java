@@ -4,6 +4,9 @@ package br.ufs.garcomeletronico.model;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Produto implements Identificavel {
     private String id;
     private String nome;
@@ -21,6 +24,24 @@ public class Produto implements Identificavel {
         this.img = String.format("garcomeletronico/src/main/resources/static/img/" + id+".png");
         this.preco = preco;
     }
+
+     @JsonCreator
+    public Produto(
+        @JsonProperty("id") String id,
+        @JsonProperty("nome") String nome,
+        @JsonProperty("descricao") String descricao,
+        @JsonProperty("categoria") String categoria,
+        @JsonProperty("img") String img,
+        @JsonProperty("preco") BigDecimal preco
+    ) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.categoria = ProdutoCategories.valueOf(categoria.toUpperCase());
+        this.img = img;
+        this.preco = preco;
+    }
+
         
     public String getId(){ return id; }
     public String getNome(){ return nome; }

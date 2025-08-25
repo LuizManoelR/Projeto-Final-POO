@@ -1,6 +1,7 @@
 package br.ufs.garcomeletronico.service;
 
 import br.ufs.garcomeletronico.model.*;
+import br.ufs.garcomeletronico.dao.MesaDAO;
 import br.ufs.garcomeletronico.event.CarrinhoEvent;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -8,9 +9,11 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.springframework.stereotype.Service;
 import org.springframework.context.ApplicationEventPublisher;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 
@@ -40,7 +43,7 @@ public class CarrinhoCookieService {
 
             // Serializar e salvar no cookie
             String json = mapper.writeValueAsString(rootNode);
-            String encoded = Base64.getEncoder().encodeToString(json.getBytes());
+             String encoded = Base64.getEncoder().encodeToString(json.getBytes(StandardCharsets.UTF_8));
 
             Cookie cookie = new Cookie("carrinho", encoded);
             cookie.setMaxAge(7 * 24 * 60 * 60);
@@ -56,8 +59,11 @@ public class CarrinhoCookieService {
         }
     }
 
-    public Carrinho carregar(HttpServletRequest request, Mesa mesa) {
-        Carrinho carrinho = new Carrinho(mesa);
+    public Carrinho carregar(HttpServletRequest request) {
+        
+        MesaDAO mesaDAO = new MesaDAO();
+
+        Carrinho carrinho = null;
 
         try {
             Cookie[] cookies = request.getCookies();
@@ -65,7 +71,23 @@ public class CarrinhoCookieService {
                 for (Cookie cookie : cookies) {
                     if ("carrinho".equals(cookie.getName())) {
                         String decoded = new String(Base64.getDecoder().decode(cookie.getValue()));
+                        System.out.println("Cookie decodificado: " + decoded);
                         ObjectNode rootNode = (ObjectNode) mapper.readTree(decoded);
+
+                        String mesaId = rootNode.get("mesaId").asText();
+                        
+                        if (mesaId == null) {
+                            System.err.println("MesaId não encontrado no cookie");
+                            return null;
+                        }
+                        Mesa mesa = mesaDAO.buscarPorCodigo(mesaId); // pega a mesa completa do banco
+
+                        if (mesa == null) {
+                            System.err.println("Mesa não encontrada para id: " + mesaId);
+                            return null;
+                        }
+                        
+                        carrinho = new Carrinho(mesa);
 
                         ArrayNode itensArray = (ArrayNode) rootNode.get("itens");
                         for (int i = 0; i < itensArray.size(); i++) {
