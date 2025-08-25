@@ -32,5 +32,24 @@ public class MesaService {
 
     }
 
+    public void mudarStatus(String id){
+
+        List<Mesa> mesas = mesaDAO.listar();
+        int index = mesaDAO.buscarIndex(id);
+        Mesa m = mesas.get(index);
+        m.mudarStatus();
+        mesaDAO.salvar(mesas);
+
+    }
+
+    public List<Mesa> buscarMesasLivres(){
+
+        return mesaDAO.listar()
+                      .stream()
+                      .filter(m -> m.getStatus().equals("Livre"))
+                      .toList();
+
+    }
+
 }
 

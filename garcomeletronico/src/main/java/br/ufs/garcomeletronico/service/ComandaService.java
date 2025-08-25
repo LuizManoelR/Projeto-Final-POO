@@ -1,8 +1,13 @@
 package br.ufs.garcomeletronico.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import br.ufs.garcomeletronico.dao.ComandaDAO;
 import br.ufs.garcomeletronico.model.Comanda;
 
+@Service
 public class ComandaService {
 
     private ComandaDAO comandaDAO;
@@ -27,24 +32,30 @@ public class ComandaService {
 
     public void fecharComanda(String id){
 
-        Comanda c = comandaDAO.buscarPorCodigo(id);
-
+        List<Comanda> cmds = comandaDAO.listar();
+        int index = comandaDAO.buscarIndex(id);
+        Comanda c = cmds.get(index);
         c.fecharComanda();
+        comandaDAO.salvar(cmds);
 
     }
 
     public void abrirComanda(String id){
 
-        Comanda c = comandaDAO.buscarPorCodigo(id);
-
+        List<Comanda> cmds = comandaDAO.listar();
+        int index = comandaDAO.buscarIndex(id);
+        Comanda c = cmds.get(index);
         c.abrirComanda();
-
+        comandaDAO.salvar(cmds);
     }
 
     public void resetComanda(String id){
-
-        Comanda c = comandaDAO.buscarPorCodigo(id);
+        
+        List<Comanda> cmds = comandaDAO.listar();
+        int index = comandaDAO.buscarIndex(id);
+        Comanda c = cmds.get(index);
         c.resetComanda();
+        comandaDAO.salvar(cmds);
 
     }
 
