@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import br.ufs.garcomeletronico.dao.ComandaDAO;
+import br.ufs.garcomeletronico.dao.ProdutoDAO;
 import br.ufs.garcomeletronico.model.Comanda;
+import br.ufs.garcomeletronico.model.Item;
 
 @Service
 public class ComandaService {
@@ -30,6 +32,24 @@ public class ComandaService {
 
     }
 
+
+    
+    public void removerItem(String idC, String idP){
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        List<Comanda> cmds = comandaDAO.listar();
+        int index = comandaDAO.buscarIndex(idC);
+        Comanda c = cmds.get(index);
+        c.removerItem(produtoDAO.buscarPorCodigo(idP));
+        comandaDAO.salvar(cmds);
+    }
+    public void adicionarItem(String id, List<Item> itens){
+
+        List<Comanda> cmds = comandaDAO.listar();
+        int index = comandaDAO.buscarIndex(id);
+        Comanda c = cmds.get(index);
+        c.adicionarItem(itens);
+        comandaDAO.salvar(cmds);
+    }
     public void fecharComanda(String id){
 
         List<Comanda> cmds = comandaDAO.listar();
