@@ -12,7 +12,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Base64;
-import java.math.BigDecimal;
+
 
 @Service
 public class CarrinhoCookieService {
@@ -33,9 +33,7 @@ public class CarrinhoCookieService {
             ArrayNode itensArray = rootNode.putArray("itens");
             for (Item item : carrinho.getCarrinho()) {
                 ObjectNode itemNode = mapper.createObjectNode();
-                itemNode.put("id", item.getProduto().getId());
-                itemNode.put("nome", item.getProduto().getNome());
-                itemNode.put("preco", item.getProduto().getPreco());
+                itemNode.set("produto", mapper.valueToTree(item.getProduto()));
                 itemNode.put("quantidade", item.getQuantidade());
                 itensArray.add(itemNode);
             }
@@ -73,12 +71,11 @@ public class CarrinhoCookieService {
                         for (int i = 0; i < itensArray.size(); i++) {
                             ObjectNode itemNode = (ObjectNode) itensArray.get(i);
 
-                            String id = itemNode.get("id").asText();
-                            String nome = itemNode.get("nome").asText();
-                            BigDecimal preco = new BigDecimal(itemNode.get("preco").asText());
-                            int quantidade = itemNode.get("quantidade").asInt();
+                            // desserializa o nó "produto" diretamente para a classe Produto
+                            var produtoNode = itemNode.get("produto");
+                            Produto produto = mapper.treeToValue(produtoNode, Produto.class);
 
-                            Produto produto = new Produto(id, nome, "", preco);
+                            int quantidade = itemNode.get("quantidade").asInt();
                             for (int j = 0; j < quantidade; j++) {
                                 carrinho.add(produto);
                             }
