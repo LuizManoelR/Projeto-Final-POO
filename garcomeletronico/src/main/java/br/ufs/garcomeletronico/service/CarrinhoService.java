@@ -44,6 +44,15 @@ public class CarrinhoService {
         carrinhoCookieService.salvar(response, carrinho);
 
     }
+    public String valorTotal(HttpServletRequest request){
+
+        Carrinho carrinho = carrinhoCookieService.carregar(request);
+        
+        if (carrinho == null) return "0";
+
+        return String.format("%.2f", carrinho.getValorTotal());
+
+    }
     public void remover(HttpServletRequest request,HttpServletResponse response,Produto produto){
 
         Carrinho carrinho = carrinhoCookieService.carregar(request);
@@ -74,6 +83,12 @@ public class CarrinhoService {
         carrinho.esvaziar();
         
         carrinhoCookieService.salvar(response, carrinho);
+
+    }
+
+    public void limpar(HttpServletResponse response){
+
+        carrinhoCookieService.limpar(response);
 
     }
 

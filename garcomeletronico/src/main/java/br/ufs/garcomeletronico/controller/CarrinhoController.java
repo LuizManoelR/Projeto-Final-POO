@@ -12,14 +12,13 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.util.List;
 
-import br.ufs.garcomeletronico.dao.ComandaDAO;
 import br.ufs.garcomeletronico.dao.MesaDAO;
 import br.ufs.garcomeletronico.dao.ProdutoDAO;
-import br.ufs.garcomeletronico.model.Comanda;
 import br.ufs.garcomeletronico.model.Item;
 import br.ufs.garcomeletronico.model.Mesa;
 import br.ufs.garcomeletronico.model.Produto;
 import br.ufs.garcomeletronico.service.CarrinhoService;
+
 
 @RestController
 @RequestMapping("/api/carrinho")
@@ -51,6 +50,13 @@ public class CarrinhoController {
     return carrinhoService.listar(request);
     }
 
+    @GetMapping("/valorTotal")
+    public String valorTotal(HttpServletRequest request) {
+        
+        return carrinhoService.valorTotal(request);
+    }
+    
+
     // Adiciona produto ao carrinho
     @PostMapping("/adicionar/{produtoId}")
     public void adicionarProduto(@PathVariable String produtoId,
@@ -72,6 +78,11 @@ public class CarrinhoController {
                                 
         Produto produto = produtoDAO.buscarPorCodigo(produtoId);
         carrinhoService.remover(request, response, produto);
+    }
+
+    @DeleteMapping("/limpar")
+    public void limpar(HttpServletResponse response){
+        carrinhoService.limpar(response);
     }
 
     // Finaliza o carrinho virando comanda/pedido
