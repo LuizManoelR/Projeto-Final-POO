@@ -5,7 +5,6 @@ body {
     color: #333;
 }
 
-/* Topbar */
 .topbar {
     display: flex;
     align-items: center;
@@ -68,13 +67,11 @@ body {
     border: 1px solid #fff;
 }
 
-/* Layout principal */
 .layout {
     display: flex;
     min-height: calc(100vh - 60px);
 }
 
-/* Sidebar */
 .sidebar {
     width: 200px;
     background: #fff;
@@ -98,7 +95,6 @@ body {
     transform: translateX(4px);
 }
 
-/* Conteúdo principal */
 .content {
     flex: 1;
     padding: 25px;
@@ -106,7 +102,6 @@ body {
     flex-direction: column;
 }
 
-/* Cards de produtos */
 .card {
     display: flex;
     align-items: center;
@@ -162,7 +157,6 @@ body {
     transform: scale(1.1);
 }
 
-/* Resumo do carrinho */
 .cart-summary {
     margin-top: 30px;
     padding: 25px;
@@ -208,7 +202,6 @@ body {
     color: #2e7d32;
 }
 
-/* Responsivo */
 @media (max-width: 900px) {
     .layout {
         flex-direction: column;
