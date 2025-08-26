@@ -14,15 +14,15 @@ import jakarta.servlet.http.HttpServletResponse;
 @Service
 public class ComandaService {
 
-    private final NotaFiscalService notaFiscalService;
+    private NotaFiscalService notaFiscalService;
 
     private ComandaDAO comandaDAO;
     private ComandaCookieService comandaCookieService;
 
-    public ComandaService(ComandaCookieService comandaCookieService, NotaFiscalService notaFiscalService){
+    public ComandaService(ComandaCookieService comandaCookieService){
         comandaDAO = new ComandaDAO();
         this.comandaCookieService = comandaCookieService;
-        this.notaFiscalService = notaFiscalService;
+        this.notaFiscalService = new NotaFiscalService();
     }
 
     public void criar(){

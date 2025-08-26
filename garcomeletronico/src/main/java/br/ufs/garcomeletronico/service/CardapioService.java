@@ -26,17 +26,16 @@ public class CardapioService {
     }
 
     public void atualizar(){cardapio.atualizar(produtoDAO.listar());}
-
     public List<Produto> filtrarCategoria(String categoria){
         atualizar();
         ProdutoCategories c = ProdutoCategories.valueOf(categoria);
 
-        return cardapio.listar()
-                       .stream()
-                       .filter(p -> p.getCategoria().equals(c.get()))
-                       .toList();
-    
+        System.out.println(c);
 
+        return cardapio.listar()
+                    .stream()
+                    .filter(p -> p.getCategoria() == c.get())
+                    .toList();
     }
 
     public List<Produto> listEntradas(){return filtrarCategoria("ENTRADA");}

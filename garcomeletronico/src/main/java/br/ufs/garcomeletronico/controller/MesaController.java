@@ -8,27 +8,13 @@ import br.ufs.garcomeletronico.model.Mesa;
 import br.ufs.garcomeletronico.service.MesaService;
 
 @RestController
-@RequestMapping("/mesas")
+@RequestMapping("/api/mesa")
 public class MesaController {
 
     private final MesaService mesaService;
 
     public MesaController(MesaService mesaService) {
         this.mesaService = mesaService;
-    }
-
-    // Criar uma única mesa
-    @PostMapping
-    public String criarMesa() {
-        mesaService.criarMesa();
-        return "Mesa criada com sucesso!";
-    }
-
-    // Criar várias mesas
-    @PostMapping("/{qtd}")
-    public String criarMesas(@PathVariable int qtd) { // @PathVariable: extrair informações dinâmicas da URL
-        mesaService.criarMesa(qtd);
-        return qtd + " mesas criadas com sucesso!";
     }
 
     // Listar mesas que chamaram o garçom
@@ -45,8 +31,8 @@ public class MesaController {
     }
 
     // Buscar mesas livres
-    @GetMapping("/livres")
-    public List<Mesa> buscarMesasLivres() {
-        return mesaService.buscarMesasLivres();
+    @GetMapping("/iniciar")
+    public Mesa iniciar() {
+        return mesaService.iniciar();
     }
 }

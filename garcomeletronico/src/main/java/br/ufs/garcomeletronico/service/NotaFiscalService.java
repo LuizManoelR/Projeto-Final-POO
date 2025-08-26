@@ -11,9 +11,9 @@ public class NotaFiscalService {
 
     private NotaFiscalDAO notaFiscalDAO;
 
-    public NotaFiscalService(NotaFiscalDAO notaFiscalDAO){
+    public NotaFiscalService(){
 
-        this.notaFiscalDAO = notaFiscalDAO;
+        notaFiscalDAO = new NotaFiscalDAO();
 
     }
 

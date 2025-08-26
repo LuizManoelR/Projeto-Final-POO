@@ -1,5 +1,7 @@
 package br.ufs.garcomeletronico.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum ProdutoCategories {
 
     ENTRADA("Entrada"),
@@ -14,7 +16,7 @@ public enum ProdutoCategories {
         this.categoria = categoria;
 
     }
-
+    @JsonValue
     public String get(){return categoria;}
 
 }

@@ -44,12 +44,13 @@ public class MesaService {
 
     public Mesa iniciar(){
 
-        Mesa mesa = buscarMesasLivres().getFirst();
+        Mesa mesa = buscarMesasLivres().stream()
+                                       .findFirst()
+                                       .get();
 
         mudarStatus(mesa.getId());
 
         return mesa;
-
 
     }
 

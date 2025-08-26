@@ -15,33 +15,15 @@ public class CardapioController {
     private CardapioService cardapioService; // usado para acessar os métodos que retornam produtos
 
     // Endpoint para listar todos os produtos
-    @GetMapping
-    public List<Produto> listarTodos() { 
-        return cardapioService.listarProdutos(); // retonra lista de Produto em JSON
-    }
-
-    // Endpoint para listar apenas entradas
-    @GetMapping("/entradas")
-    public List<Produto> listarEntradas() {
-        return cardapioService.listEntradas();
-    }
-
-    // Endpoint para listar apenas pratos principais
-    @GetMapping("/pratos-principais")
-    public List<Produto> listarPratosPrincipais() {
-        return cardapioService.listPratosPrincipais();
-    }
-
-    // Endpoint para listar apenas bebidas
-    @GetMapping("/bebidas")
-    public List<Produto> listarBebidas() {
-        return cardapioService.listBebidas();
-    }
-
-    // Endpoint para listar apenas sobremesas
-    @GetMapping("/sobremesas")
-    public List<Produto> listarSobremesas() {
-        return cardapioService.listSobremesa();
+   @GetMapping("/categoria/{categoria}")
+    public List<Produto> listarPorCategoria(@PathVariable String categoria) {
+        return switch (categoria.toLowerCase()) {
+            case "entradas" -> cardapioService.listEntradas();
+            case "pratos-principais" -> cardapioService.listPratosPrincipais();
+            case "bebidas" -> cardapioService.listBebidas();
+            case "sobremesas" -> cardapioService.listSobremesa();
+            default -> cardapioService.listarProdutos();
+        };
     }
 
     // Endpoint para buscar produtos por nome
