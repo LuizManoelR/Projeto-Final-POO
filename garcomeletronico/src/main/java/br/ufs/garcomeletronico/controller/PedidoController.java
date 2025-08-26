@@ -1,93 +1,70 @@
 package br.ufs.garcomeletronico.controller;
 
-import br.ufs.garcomeletronico.model.Carrinho;
-import br.ufs.garcomeletronico.model.Item;
-import br.ufs.garcomeletronico.model.Mesa;
 import br.ufs.garcomeletronico.model.Pedido;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import br.ufs.garcomeletronico.service.PedidoService;
+
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 
-@Controller
-@RequestMapping("/pedidos")
+@RestController
+@RequestMapping("/api/pedidos")
 public class PedidoController {
-    private final List<Pedido> pedidos = new ArrayList<>();
+    private PedidoService pedidoService;
 
-    @GetMapping
-    public String listar(Model model){
-        model.addAttribute("pedidos", new ArrayList<>(pedidos));
-        return "pedidos/list";
+    public PedidoController(PedidoService pedidoService){
+
+        this.pedidoService = pedidoService;
+
+    }
+    
+    // busca os pedidos pendentes
+    @GetMapping("/pendente")
+    public List<Pedido> pendentes() {
+        return pedidoService.listarPendente() ;
+    }
+    // busca os pedidos pendentes
+    @GetMapping("/emProducao")
+    public List<Pedido> emProducao() {
+        return pedidoService.listarEmProducao() ;
+    }
+    // busca os pedidos pendentes
+    @GetMapping("/concluido")
+    public List<Pedido> concluidos() {
+        return pedidoService.listarConcluido() ;
+    }
+    // busca os pedidos pendentes
+    @GetMapping("/cancelado")
+    public List<Pedido> cancelado() {
+        return pedidoService.listarCancelado() ;
     }
 
-    @GetMapping("/novo")
-    public String novo(){
-        return "pedidos/novo";
+    @PostMapping("/produzir/{id}")
+    public void produzir(@PathVariable String id){
+        pedidoService.produzir(id);
+    }
+    @PostMapping("/concluir/{id}")
+    public void concluir(@PathVariable String id){
+        pedidoService.concluir(id);
+    }
+    @PostMapping("/cancelar/{id}")
+    public void cancelar(@PathVariable String id){
+        pedidoService.cancelar(id);
+    }
+    @PostMapping("/coletar/{id}")
+    public void coletar(@PathVariable String id){
+        pedidoService.pedidoColetado(id);
     }
 
-    @PostMapping("/criar")
-    public String criar(HttpSession session) {
-        Carrinho carrinho = (Carrinho) session.getAttribute("carrinho"); // Lê o carrinho 
-        if (carrinho == null || carrinho.isEmpty()){
-            return "redirect:/carrinho";
-        }
+    @DeleteMapping("/resetCancelados")
+    public void resetCanselados(){
 
-        List<Item> itens = new ArrayList<>(carrinho.getCarrinho()); // constrói lista de itens
-        Mesa mesa = carrinho.getMesa(); // constrói mesa
-        Pedido pedido = new Pedido(itens, mesa);
-        pedidos.add(pedido); 
+        pedidoService.removeCancelados();
 
-        carrinho.esvaziar();
-        session.removeAttribute("carrinho");
-
-        return "redirect:/pedidos/" + pedido.getId();
     }
 
-    // Localizam o pedido e chamam p.metodo() para alterar o status do model
-    @GetMapping("/{id}")
-    public String ver(@PathVariable String id, Model model) {
-        Pedido p = findById(id);
-        if (p == null) return "redirect:/pedidos";
-        model.addAttribute("pedido", p);
-        return "pedidos/ver";
-    }
 
-    @PostMapping("/{id}/produzir")
-    public String produzir(@PathVariable String id) {
-        Pedido p = findById(id);
-        if (p != null) p.produzir();
-        return "redirect:/pedidos/" + id;
-    }
-
-    @PostMapping("/{id}/concluir")
-    public String concluir(@PathVariable String id) {
-        Pedido p = findById(id);
-        if (p != null) p.concluir();
-        return "redirect:/pedidos/" + id;
-    }
-
-    @PostMapping("/{id}/cancelar")
-    public String cancelar(@PathVariable String id) {
-        Pedido p = findById(id);
-        if (p != null) p.cancelar();
-        return "redirect:/pedidos/" + id;
-    }
-
-    @PostMapping("/{id}/remover")
-    public String remover(@PathVariable String id) {
-        pedidos.removeIf(p -> p.getId().equals(id));
-        return "redirect:/pedidos";
-    }
-
-    // helper
-    private Pedido findById(String id) {
-        for (Pedido p : pedidos) if (p.getId().equals(id)) return p;
-        return null;
-    }
     
 }
     

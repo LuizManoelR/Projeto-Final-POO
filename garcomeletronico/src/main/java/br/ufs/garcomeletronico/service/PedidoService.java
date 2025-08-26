@@ -46,7 +46,7 @@ public class PedidoService {
     
     public List<Pedido> listarConcluido(){
 
-        return filtrarStatus("CONCLUIDOS");
+        return filtrarStatus("CONCLUIDO");
     }
     
     public List<Pedido> listarCancelado(){
@@ -57,6 +57,34 @@ public class PedidoService {
     public void pedidoColetado(String id){
 
         pedidoDAO.remover(id);
+
+    }
+
+    public void produzir(String id){
+
+        List<Pedido> pedidos = pedidoDAO.listar();
+        int index = pedidoDAO.buscarIndex(id);
+        Pedido pedido = pedidos.get(index);
+        pedido.produzir();
+        pedidoDAO.salvar(pedidos);
+
+    }
+    public void concluir(String id){
+
+        List<Pedido> pedidos = pedidoDAO.listar();
+        int index = pedidoDAO.buscarIndex(id);
+        Pedido pedido = pedidos.get(index);
+        pedido.concluir();
+        pedidoDAO.salvar(pedidos);
+
+    }
+    public void cancelar(String id){
+
+        List<Pedido> pedidos = pedidoDAO.listar();
+        int index = pedidoDAO.buscarIndex(id);
+        Pedido pedido = pedidos.get(index);
+        pedido.cancelar();
+        pedidoDAO.salvar(pedidos);
 
     }
 

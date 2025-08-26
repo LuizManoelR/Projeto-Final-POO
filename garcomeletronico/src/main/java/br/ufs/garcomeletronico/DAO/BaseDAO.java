@@ -75,7 +75,7 @@ public abstract class BaseDAO<T extends Identificavel> {//utiliza generics para 
 
     public synchronized void remover(String id){//remove apartir de um id e salva
         atualizarLista();
-        lista.remove(buscarPorCodigo(id));
+        lista.removeIf(obj -> obj.getId().equalsIgnoreCase(id));
         salvar(lista);
     }
     public synchronized void remover(List<T> objs){//remove apartir de uma lista de objetos e salva
@@ -83,8 +83,7 @@ public abstract class BaseDAO<T extends Identificavel> {//utiliza generics para 
         for(T obj: objs){
             
             String id = obj.getId();
-
-            lista.remove(buscarPorCodigo(id));
+            remover(id);
 
         }
 
