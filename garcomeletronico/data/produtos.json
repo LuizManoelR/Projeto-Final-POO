@@ -1,5 +1,13 @@
 [
   {
+    "id": "P0020",
+    "nome": "Água com gás 500 mL",
+    "descricao": "Água mineral com gás, garrafa de 500 mL.",
+    "categoria": "BEBIDA",
+    "img": "garcomeletronico/src/main/resources/static/img/produto20.png",
+    "preco": 5.90
+  },
+  {
     "id": "P0002",
     "nome": "Batata frita com cheddar e bacon",
     "descricao": "Batatas fritas crocantes com cheddar e bacon.",
@@ -150,13 +158,5 @@
     "categoria": "ENTRADA",
     "img": "garcomeletronico/src/main/resources/static/img/produto3.png",
     "preco": 27.90
-  },
-  {
-    "id": "P0020",
-    "nome": "Água com gás 500 mL",
-    "descricao": "Água mineral com gás, garrafa de 500 mL.",
-    "categoria": "BEBIDA",
-    "img": "garcomeletronico/src/main/resources/static/img/produto20.png",
-    "preco": 5.90
   }
 ]
