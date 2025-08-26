@@ -1,10 +1,162 @@
 [
   {
     "id": "P0001",
-    "nome": "Café Espresso",
-    "descricao": "Café Tradicional Espresso",
-    "categoria": "BEBIDA",
+    "nome": "",
+    "descricao": "",
+    "categoria": "ENTRADA",
     "img": "garcomeletronico/src/main/resources/static/img/P0001.png",
-    "preco": 4.50
+    "preco": 1
+  },
+  {
+    "id": "P0002",
+    "nome": "",
+    "descricao": "",
+    "categoria": "PRATOPRINCIPAL",
+    "img": "garcomeletronico/src/main/resources/static/img/P0002.png",
+    "preco": 1
+  },
+  {
+    "id": "P0003",
+    "nome": "",
+    "descricao": "",
+    "categoria": "BEBIDA",
+    "img": "garcomeletronico/src/main/resources/static/img/P0003.png",
+    "preco": 1
+  },
+  {
+    "id": "P0004",
+    "nome": "",
+    "descricao": "",
+    "categoria": "SOBREMESA",
+    "img": "garcomeletronico/src/main/resources/static/img/P0004.png",
+    "preco": 1
+  },
+  {
+    "id": "P0005",
+    "nome": "",
+    "descricao": "",
+    "categoria": "ENTRADA",
+    "img": "garcomeletronico/src/main/resources/static/img/P0005.png",
+    "preco": 1
+  },
+  {
+    "id": "P0006",
+    "nome": "",
+    "descricao": "",
+    "categoria": "PRATOPRINCIPAL",
+    "img": "garcomeletronico/src/main/resources/static/img/P0006.png",
+    "preco": 1
+  },
+  {
+    "id": "P0007",
+    "nome": "",
+    "descricao": "",
+    "categoria": "BEBIDA",
+    "img": "garcomeletronico/src/main/resources/static/img/P0007.png",
+    "preco": 1
+  },
+  {
+    "id": "P0008",
+    "nome": "",
+    "descricao": "",
+    "categoria": "SOBREMESA",
+    "img": "garcomeletronico/src/main/resources/static/img/P0008.png",
+    "preco": 1
+  },
+  {
+    "id": "P0009",
+    "nome": "",
+    "descricao": "",
+    "categoria": "ENTRADA",
+    "img": "garcomeletronico/src/main/resources/static/img/P0009.png",
+    "preco": 1
+  },
+  {
+    "id": "P0010",
+    "nome": "",
+    "descricao": "",
+    "categoria": "PRATOPRINCIPAL",
+    "img": "garcomeletronico/src/main/resources/static/img/P0010.png",
+    "preco": 1
+  },
+  {
+    "id": "P0011",
+    "nome": "",
+    "descricao": "",
+    "categoria": "BEBIDA",
+    "img": "garcomeletronico/src/main/resources/static/img/P0011.png",
+    "preco": 1
+  },
+  {
+    "id": "P0012",
+    "nome": "",
+    "descricao": "",
+    "categoria": "SOBREMESA",
+    "img": "garcomeletronico/src/main/resources/static/img/P0012.png",
+    "preco": 1
+  },
+  {
+    "id": "P0013",
+    "nome": "",
+    "descricao": "",
+    "categoria": "ENTRADA",
+    "img": "garcomeletronico/src/main/resources/static/img/P0013.png",
+    "preco": 1
+  },
+  {
+    "id": "P0014",
+    "nome": "",
+    "descricao": "",
+    "categoria": "PRATOPRINCIPAL",
+    "img": "garcomeletronico/src/main/resources/static/img/P0014.png",
+    "preco": 1
+  },
+  {
+    "id": "P0015",
+    "nome": "",
+    "descricao": "",
+    "categoria": "BEBIDA",
+    "img": "garcomeletronico/src/main/resources/static/img/P0015.png",
+    "preco": 1
+  },
+  {
+    "id": "P0016",
+    "nome": "",
+    "descricao": "",
+    "categoria": "SOBREMESA",
+    "img": "garcomeletronico/src/main/resources/static/img/P0016.png",
+    "preco": 1
+  },
+  {
+    "id": "P0017",
+    "nome": "",
+    "descricao": "",
+    "categoria": "ENTRADA",
+    "img": "garcomeletronico/src/main/resources/static/img/P0017.png",
+    "preco": 1
+  },
+  {
+    "id": "P0018",
+    "nome": "",
+    "descricao": "",
+    "categoria": "PRATOPRINCIPAL",
+    "img": "garcomeletronico/src/main/resources/static/img/P0018.png",
+    "preco": 1
+  },
+  {
+    "id": "P0019",
+    "nome": "",
+    "descricao": "",
+    "categoria": "BEBIDA",
+    "img": "garcomeletronico/src/main/resources/static/img/P0019.png",
+    "preco": 1
+  },
+  {
+    "id": "P0020",
+    "nome": "",
+    "descricao": "",
+    "categoria": "SOBREMESA",
+    "img": "garcomeletronico/src/main/resources/static/img/P0020.png",
+    "preco": 1
   }
 ]
