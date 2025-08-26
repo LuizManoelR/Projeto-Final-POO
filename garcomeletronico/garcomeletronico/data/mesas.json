@@ -1,1 +1,62 @@
-[]
+[
+  {
+    "id": "Mesa0001",
+    "status": "LIVRE",
+    "chamouGarcom": false
+  },
+  {
+    "id": "Mesa0002",
+    "status": "LIVRE",
+    "chamouGarcom": false
+  },
+  {
+    "id": "Mesa0005",
+    "status": "LIVRE",
+    "chamouGarcom": false
+  },
+  {
+    "id": "Mesa0010",
+    "status": "LIVRE",
+    "chamouGarcom": false
+  },
+  {
+    "id": "Mesa0017",
+    "status": "LIVRE",
+    "chamouGarcom": false
+  },
+  {
+    "id": "Mesa0026",
+    "status": "LIVRE",
+    "chamouGarcom": false
+  },
+  {
+    "id": "Mesa0007",
+    "status": "LIVRE",
+    "chamouGarcom": false
+  },
+  {
+    "id": "Mesa0020",
+    "status": "LIVRE",
+    "chamouGarcom": false
+  },
+  {
+    "id": "Mesa0035",
+    "status": "LIVRE",
+    "chamouGarcom": false
+  },
+  {
+    "id": "Mesa0052",
+    "status": "LIVRE",
+    "chamouGarcom": false
+  },
+  {
+    "id": "Mesa0071",
+    "status": "LIVRE",
+    "chamouGarcom": false
+  },
+  {
+    "id": "Mesa0092",
+    "status": "LIVRE",
+    "chamouGarcom": false
+  }
+]

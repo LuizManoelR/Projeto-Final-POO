@@ -1,4 +1,4 @@
-package br.ufs.garcomeletronico.controller;
+/*package br.ufs.garcomeletronico.controller;
 
 import br.ufs.garcomeletronico.model.Item;
 import br.ufs.garcomeletronico.service.CardapioService;
@@ -81,3 +81,4 @@ public String viewCozinha(Model model) {
     model.addAttribute("pedidos", pedidos);
     return "cozinha";
 }
+    */
