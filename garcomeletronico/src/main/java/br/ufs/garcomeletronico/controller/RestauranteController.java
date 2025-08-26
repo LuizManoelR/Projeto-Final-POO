@@ -74,3 +74,10 @@ public class RestauranteController {
         return "home";
     }
 }
+@GetMapping("/cozinha")
+public String viewCozinha(Model model) {
+    List<Pedido> pedidos = pedidoService.listarPedidosAbertos();
+
+    model.addAttribute("pedidos", pedidos);
+    return "cozinha";
+}

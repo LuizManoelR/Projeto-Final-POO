@@ -1,0 +1,26 @@
+<main class="layout-cozinha">
+
+    <section class="content-cozinha">
+        <h2>Pedidos em Andamento</h2>
+
+        <table class="pedidos">
+            <thead>
+                <tr>
+                    <th>Mesa</th>
+                    <th>Item</th>
+                    <th>Qtd</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pedido : ${pedidos}">
+                    <td th:text="${pedido.mesa}">Mesa 002</td>
+                    <td th:text="${pedido.item.nome}">Produto</td>
+                    <td th:text="${pedido.quantidade}">1</td>
+                    <td th:text="${pedido.status}">Preparando</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+</main>

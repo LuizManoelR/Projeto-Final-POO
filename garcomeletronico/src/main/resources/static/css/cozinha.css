@@ -1,0 +1,41 @@
+.layout-cozinha {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background: #f4f6f8;
+    min-height: 100vh;
+}
+
+.content-cozinha h2 {
+    color: #2e7d32;
+    margin-bottom: 15px;
+}
+
+.pedidos {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.pedidos th, .pedidos td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.pedidos th {
+    background: #a5d6a7;
+    color: #1b5e20;
+}
+
+.pedidos tr:hover {
+    background: #e8f5e9;
+}
+
+.pedidos td:last-child {
+    font-weight: bold;
+    color: #2e7d32;
+}

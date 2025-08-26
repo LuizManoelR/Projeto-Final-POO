@@ -1,40 +1,13 @@
-<!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Conta • Restaurante</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-<body>
-<header class="topbar">
-    <div class="brand">( )</div>
-
-    <form class="search" method="get" th:action="@{/}">
-        <label>Conta</label>
-        <input type="text" name="q" placeholder="Buscar..." th:value="${q}">
-        <button type="submit" aria-label="buscar">🔍</button>
-    </form>
-
-    <div class="mesa" th:text="${mesa}">mesa 002</div>
-
-    <div class="cart">
-        🛒 <span th:text="${carrinho.quantidadeTotal}">0</span>
-    </div>
-</header>
-
 <main class="layout">
-
     <aside class="sidebar">
         <a th:classappend="${categoriaAtual}==null ? ' active'" th:href="@{/}">Tudo</a>
         <a th:each="c : ${categorias}" 
-            th:classappend="${categoriaAtual}==${c.name()} ? ' active'" 
-            th:text="${c.rotulo}" 
-            th:href="@{|/categoria/${c.name()}|}">Categoria</a>
+            th:classappend="${categoriaAtual}==${c}? ' active'" 
+            th:text="${c}" 
+            th:href="@{|/categoria/${c}|}">Categoria</a>
     </aside>
 
     <section class="content">
-
 
         <article class="card" th:each="item : ${itens}">
             <img th:src="@{${item.imagem}}" alt="Imagem do item" class="thumb">
@@ -42,12 +15,11 @@
                 <h3 th:text="${item.nome}">Nome</h3>
                 <p class="desc" th:text="${item.descricao}">Descrição</p>
             </div>
-            <div class="price" th:text="${#numbers.formatDecimal(item.preco, 1, 2)}">0,00</div>
+            <div class="price" th:text="${#numbers.formatDecimal(item.preco,1,2)}">0,00</div>
             <form class="add" th:action="@{|/adicionar/${item.id}|}" method="post">
                 <button type="submit" title="Adicionar">＋</button>
             </form>
         </article>
-
 
         <section class="cart-summary" th:if="${carrinho.quantidadeTotal > 0}">
             <h2>🛒 Carrinho</h2>
@@ -64,7 +36,7 @@
                     <tr th:each="entry : ${carrinho.itens}">
                         <td th:text="${entry.key.nome}">Item</td>
                         <td th:text="${entry.value}">1</td>
-                        <td th:text="${#numbers.formatDecimal(entry.key.preco.multiply(T(entry.value).bigDecimalValue()), 1, 2)}">0,00</td>
+                        <td th:text="${#numbers.formatDecimal(entry.key.preco.multiply(T(entry.value).bigDecimalValue()),1,2)}">0,00</td>
                         <td>
                             <form th:action="@{|/remover/${entry.key.id}|}" method="post" style="display:inline">
                                 <button type="submit">−</button>
@@ -75,11 +47,9 @@
             </table>
             <div class="total">
                 <span>Total:</span>
-                <strong th:text="${#numbers.formatDecimal(carrinho.total, 1, 2)}">0,00</strong>
+                <strong th:text="${#numbers.formatDecimal(carrinho.total,1,2)}">0,00</strong>
             </div>
         </section>
 
     </section>
 </main>
-</body>
-</html>
