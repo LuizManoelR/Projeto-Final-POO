@@ -1,8 +1,8 @@
 [
   {
     "id": "P0001",
-    "nome": "Cafê Espresso",
-    "descricao": "Cafê Tradicional Espresso",
+    "nome": "Café Espresso",
+    "descricao": "Café Tradicional Espresso",
     "categoria": "BEBIDA",
     "img": "garcomeletronico/src/main/resources/static/img/P0001.png",
     "preco": 4.50

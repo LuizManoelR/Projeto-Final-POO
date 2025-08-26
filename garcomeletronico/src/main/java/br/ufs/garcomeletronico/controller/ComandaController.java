@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -50,6 +51,14 @@ public class ComandaController {
        
         comandaService.fecharComanda(resgatarId(request));
     }
+    @PostMapping("/fechar/{comandaId}")
+    public void fecharComanda(@PathVariable String comandaId,
+                            HttpServletRequest request,
+                            HttpServletResponse response) {
+        System.out.println("Post recebido");
+       
+        comandaService.fecharComanda(comandaId);
+    }
  
     // reseta a comanda
     @PostMapping("/reset")
@@ -58,6 +67,14 @@ public class ComandaController {
        
         comandaService.resetComanda(resgatarId(request));
         limpar(response);
+    }
+    @PostMapping("/reset/{comandaId}")
+    public void resetComanda(@PathVariable String comandaId,
+                            HttpServletRequest request,
+                            HttpServletResponse response) {
+        System.out.println("Post recebido");
+       
+        comandaService.resetComanda(comandaId);
     }
     @PostMapping("/iniciar")
     public void iniciar(HttpServletResponse response, HttpServletRequest request) {

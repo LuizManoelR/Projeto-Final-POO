@@ -12,6 +12,12 @@ public class ProdutoDAO extends BaseDAO<Produto> {
         super("garcomeletronico/data/produtos.json", Produto.class);
     }
 
+    public synchronized void ordernar() {///ordena ao banco de dados dos produtos
+            salvar(lista.stream()
+                        .sorted(Comparator.comparing(Produto::getNome))
+                        .collect(Collectors.toList()));
+
+    }
     
     public static void main(String[] args) {
         

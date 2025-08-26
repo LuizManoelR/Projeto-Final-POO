@@ -28,7 +28,7 @@ public class CardapioService {
     public void atualizar(){cardapio.atualizar(produtoDAO.listar());}
 
     public List<Produto> filtrarCategoria(String categoria){
-    
+        atualizar();
         ProdutoCategories c = ProdutoCategories.valueOf(categoria);
 
         return cardapio.listar()
@@ -38,15 +38,15 @@ public class CardapioService {
     
 
     }
-    
-    public List<Produto> listarTodos(){return produtoDAO.listar();}
+
     public List<Produto> listEntradas(){return filtrarCategoria("ENTRADA");}
     public List<Produto> listPratosPrincipais(){return filtrarCategoria("PRATOPRINCIPAL");}
     public List<Produto> listBebidas(){return filtrarCategoria("BEBIDA");}
     public List<Produto> listSobremesa(){return filtrarCategoria("SOBREMESA");}
 
     public List<Produto> listarProdutos() {
-    return cardapio.listar();
+        atualizar();
+        return cardapio.listar();
     }
 
 }

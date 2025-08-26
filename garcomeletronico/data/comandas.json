@@ -2,22 +2,10 @@
   {
     "id": "0001",
     "state": {
-      "type": "ComandaFechada",
+      "type": "ComandaLivre",
       "data": {}
     },
-    "pedidos": [
-      {
-        "produto": {
-          "id": "P0001",
-          "nome": "Cafê Espresso",
-          "descricao": "Cafê Tradicional Espresso",
-          "categoria": "BEBIDA",
-          "img": "garcomeletronico/src/main/resources/static/img/P0001.png",
-          "preco": 4.5
-        },
-        "qtd": 3
-      }
-    ]
+    "pedidos": []
   },
   {
     "id": "0002",

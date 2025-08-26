@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cardapio") // caminho base das requisições, i.e., todos endpoints terão cardapio no começo da URL
+@RequestMapping("/api/cardapio") // caminho base das requisições, i.e., todos endpoints terão cardapio no começo da URL
 public class CardapioController {
 
     @Autowired // Spring injeta automaticamente a instância de CardapioService
