@@ -42,6 +42,17 @@ public class MesaService {
 
     }
 
+    public Mesa iniciar(){
+
+        Mesa mesa = buscarMesasLivres().getFirst();
+
+        mudarStatus(mesa.getId());
+
+        return mesa;
+
+
+    }
+
     public List<Mesa> buscarMesasLivres(){
 
         return mesaDAO.listar()

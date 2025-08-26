@@ -22,9 +22,9 @@ public class GarcomeletronicoApplication {
     @Bean
     CommandLineRunner runDemo() {
         return args -> {
+            
+              
 
-            produtoService.criarProduto("Cafê Espresso", "Cafê Tradicional Espresso", "BEBIDA", "4.50");
-        
         };
     }
 }

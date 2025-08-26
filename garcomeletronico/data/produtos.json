@@ -1,162 +1,199 @@
 [
   {
     "id": "P0001",
-    "nome": "",
-    "descricao": "",
+    "nome": "Croquetes de calabresa com queijo",
+    "descricao": " Calabresa toscana e queijo muçarela",
     "categoria": "ENTRADA",
-    "img": "garcomeletronico/src/main/resources/static/img/P0001.png",
-    "preco": 1
+    "img": "garcomeletronico/src/main/resources/static/img/produto1.png",
+    "preco": 20.00
   },
+
   {
     "id": "P0002",
-    "nome": "",
-    "descricao": "",
-    "categoria": "PRATOPRINCIPAL",
-    "img": "garcomeletronico/src/main/resources/static/img/P0002.png",
-    "preco": 1
+    "nome": "Batata frita com cheddar e bacon",
+    "descricao": " ",
+    "categoria": "ENTRADA",
+    "img": "garcomeletronico/src/main/resources/static/img/produto2.png",
+    "preco": 19.50
   },
+
   {
     "id": "P0003",
-    "nome": "",
-    "descricao": "",
-    "categoria": "BEBIDA",
-    "img": "garcomeletronico/src/main/resources/static/img/P0003.png",
-    "preco": 1
+    "nome": "Tábua de queijos e torradas",
+    "descricao": " ",
+    "categoria": "ENTRADA",
+    "img": "garcomeletronico/src/main/resources/static/img/produto3.png",
+    "preco": 27.90
   },
+
+  {
+    "id": "P0003",
+    "nome": "Tábua de queijos e torradas",
+    "descricao": " ",
+    "categoria": "ENTRADA",
+    "img": "garcomeletronico/src/main/resources/static/img/produto3.png",
+    "preco": 27.90
+  },
+
   {
     "id": "P0004",
-    "nome": "",
-    "descricao": "",
-    "categoria": "SOBREMESA",
-    "img": "garcomeletronico/src/main/resources/static/img/P0004.png",
-    "preco": 1
+    "nome": "Casquinha de pizza",
+    "descricao": " ",
+    "categoria": "ENTRADA",
+    "img": "garcomeletronico/src/main/resources/static/img/produto4.png",
+    "preco": 20.00
   },
+
   {
     "id": "P0005",
-    "nome": "",
-    "descricao": "",
+    "nome": "Bruschetta",
+    "descricao": " ",
     "categoria": "ENTRADA",
-    "img": "garcomeletronico/src/main/resources/static/img/P0005.png",
-    "preco": 1
+    "img": "garcomeletronico/src/main/resources/static/img/produto5.png",
+    "preco": 20.00
   },
+
   {
     "id": "P0006",
-    "nome": "",
-    "descricao": "",
-    "categoria": "PRATOPRINCIPAL",
-    "img": "garcomeletronico/src/main/resources/static/img/P0006.png",
-    "preco": 1
+    "nome": "Hambúrguer gourmet",
+    "descricao": " HAMBÚRGUER DE 200 GRAMAS, PÃO SELADO NA MANTEIGA, SALADA, BACON , CEBOLA CARAMELIZADA ",
+    "categoria": "PRATO PRINCIPAL",
+    "img": "garcomeletronico/src/main/resources/static/img/produto6.png",
+    "preco": 29.50
   },
+
   {
     "id": "P0007",
-    "nome": "",
-    "descricao": "",
-    "categoria": "BEBIDA",
-    "img": "garcomeletronico/src/main/resources/static/img/P0007.png",
-    "preco": 1
+    "nome": "Feijoada gourmet",
+    "descricao": "feijoada , arroz branco soltinho , farofa de ovos e cebola , torresmo , couve refogada. ",
+    "categoria": "PRATO PRINCIPAL",
+    "img": "garcomeletronico/src/main/resources/static/img/produto7.png",
+    "preco": 29.50
   },
+
+  {
+    "id": "P0007",
+    "nome": "Feijoada gourmet",
+    "descricao": "feijoada , arroz branco soltinho , farofa de ovos e cebola , torresmo , couve refogada. ",
+    "categoria": "PRATO PRINCIPAL",
+    "img": "garcomeletronico/src/main/resources/static/img/produto7.png",
+    "preco": 29.50
+  },
+
   {
     "id": "P0008",
-    "nome": "",
-    "descricao": "",
-    "categoria": "SOBREMESA",
-    "img": "garcomeletronico/src/main/resources/static/img/P0008.png",
-    "preco": 1
+    "nome": "Pizza individual pepperoni.",
+    "descricao": " ",
+    "categoria": "PRATO PRINCIPAL",
+    "img": "garcomeletronico/src/main/resources/static/img/produto8.png",
+    "preco": 31.00
   },
+
   {
     "id": "P0009",
-    "nome": "",
-    "descricao": "",
-    "categoria": "ENTRADA",
-    "img": "garcomeletronico/src/main/resources/static/img/P0009.png",
-    "preco": 1
+    "nome": "Espaguete a bolonhesa",
+    "descricao": " ",
+    "categoria": "PRATO PRINCIPAL",
+    "img": "garcomeletronico/src/main/resources/static/img/produto9.png",
+    "preco": 31.00
   },
+
   {
     "id": "P0010",
-    "nome": "",
-    "descricao": "",
-    "categoria": "PRATOPRINCIPAL",
-    "img": "garcomeletronico/src/main/resources/static/img/P0010.png",
-    "preco": 1
+    "nome": "Lasanha bolonhesa",
+    "descricao": " ",
+    "categoria": "PRATO PRINCIPAL",
+    "img": "garcomeletronico/src/main/resources/static/img/produto10.png",
+    "preco": 31.00
   },
+
   {
     "id": "P0011",
-    "nome": "",
-    "descricao": "",
-    "categoria": "BEBIDA",
-    "img": "garcomeletronico/src/main/resources/static/img/P0011.png",
-    "preco": 1
+    "nome": "Petit gateau",
+    "descricao": " ",
+    "categoria": "SOBREMESA",
+    "img": "garcomeletronico/src/main/resources/static/img/produto11.png",
+    "preco": 19.00
   },
+
   {
     "id": "P0012",
-    "nome": "",
-    "descricao": "",
+    "nome": "Torta alemã",
+    "descricao": " ",
     "categoria": "SOBREMESA",
-    "img": "garcomeletronico/src/main/resources/static/img/P0012.png",
-    "preco": 1
+    "img": "garcomeletronico/src/main/resources/static/img/produto12.png",
+    "preco": 17.00
   },
+
   {
     "id": "P0013",
-    "nome": "",
-    "descricao": "",
-    "categoria": "ENTRADA",
-    "img": "garcomeletronico/src/main/resources/static/img/P0013.png",
-    "preco": 1
+    "nome": "Cheesecake",
+    "descricao": " ",
+    "categoria": "SOBREMESA",
+    "img": "garcomeletronico/src/main/resources/static/img/produto13.png",
+    "preco": 18.00
   },
+
   {
     "id": "P0014",
-    "nome": "",
-    "descricao": "",
-    "categoria": "PRATOPRINCIPAL",
-    "img": "garcomeletronico/src/main/resources/static/img/P0014.png",
-    "preco": 1
+    "nome": "Mousse de maracujá",
+    "descricao": " ",
+    "categoria": "SOBREMESA",
+    "img": "garcomeletronico/src/main/resources/static/img/produto14.png",
+    "preco": 15.00
   },
+
   {
     "id": "P0015",
-    "nome": "",
-    "descricao": "",
-    "categoria": "BEBIDA",
-    "img": "garcomeletronico/src/main/resources/static/img/P0015.png",
-    "preco": 1
+    "nome": "Pavê tradicional",
+    "descricao": " ",
+    "categoria": "SOBREMESA",
+    "img": "garcomeletronico/src/main/resources/static/img/produto15.png",
+    "preco": 17.00
   },
+
   {
     "id": "P0016",
-    "nome": "",
-    "descricao": "",
-    "categoria": "SOBREMESA",
-    "img": "garcomeletronico/src/main/resources/static/img/P0016.png",
-    "preco": 1
+    "nome": "Coca-Cla lata 350 mL",
+    "descricao": " ",
+    "categoria": "BEBIDAS",
+    "img": "garcomeletronico/src/main/resources/static/img/produto16.png",
+    "preco": 7.00
   },
+
   {
     "id": "P0017",
-    "nome": "",
-    "descricao": "",
-    "categoria": "ENTRADA",
-    "img": "garcomeletronico/src/main/resources/static/img/P0017.png",
-    "preco": 1
+    "nome": "Coca-Cola zero açúcar lata 350 mL",
+    "descricao": " ",
+    "categoria": "BEBIDAS",
+    "img": "garcomeletronico/src/main/resources/static/img/produto17.png",
+    "preco": 7.00
   },
+
   {
     "id": "P0018",
-    "nome": "",
-    "descricao": "",
-    "categoria": "PRATOPRINCIPAL",
-    "img": "garcomeletronico/src/main/resources/static/img/P0018.png",
-    "preco": 1
+    "nome": "Café espresso 120 mL",
+    "descricao": " ",
+    "categoria": "BEBIDAS",
+    "img": "garcomeletronico/src/main/resources/static/img/produto18.png",
+    "preco": 8.50
   },
+
   {
     "id": "P0019",
-    "nome": "",
-    "descricao": "",
-    "categoria": "BEBIDA",
-    "img": "garcomeletronico/src/main/resources/static/img/P0019.png",
-    "preco": 1
+    "nome": "Jarra de suco de laranja",
+    "descricao": " ",
+    "categoria": "BEBIDAS",
+    "img": "garcomeletronico/src/main/resources/static/img/produto19.png",
+    "preco": 12.00
   },
+
   {
     "id": "P0020",
-    "nome": "",
-    "descricao": "",
-    "categoria": "SOBREMESA",
-    "img": "garcomeletronico/src/main/resources/static/img/P0020.png",
-    "preco": 1
+    "nome": "Água com gás 500 mL",
+    "descricao": " ",
+    "categoria": "BEBIDAS",
+    "img": "garcomeletronico/src/main/resources/static/img/produto20.png",
+    "preco": 5.90
   }
 ]

@@ -3,6 +3,7 @@ package br.ufs.garcomeletronico.model;
 
 import java.util.List;
 
+
 public class Pedido implements Identificavel{
     private List<Item> itens;
     private Mesa mesa;
@@ -42,6 +43,17 @@ public class Pedido implements Identificavel{
     public void concluir(){setStatus("CONCLUIDO");}
     public void cancelar(){setStatus("CANCELADO");}
 
+    @Override
+    public boolean equals(Object obj){
+
+        if(this == obj) return true;
+        if(obj == null || getClass() != obj.getClass()) return false;
+
+        Pedido outro = (Pedido) obj;
+
+        return this.getId().equals(outro.getId());
+
+    }
 
     @Override
     public String toString(){
