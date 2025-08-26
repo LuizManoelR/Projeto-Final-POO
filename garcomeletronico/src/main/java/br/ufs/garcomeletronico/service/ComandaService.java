@@ -14,12 +14,15 @@ import jakarta.servlet.http.HttpServletResponse;
 @Service
 public class ComandaService {
 
+    private final NotaFiscalService notaFiscalService;
+
     private ComandaDAO comandaDAO;
     private ComandaCookieService comandaCookieService;
 
-    public ComandaService(ComandaCookieService comandaCookieService){
+    public ComandaService(ComandaCookieService comandaCookieService, NotaFiscalService notaFiscalService){
         comandaDAO = new ComandaDAO();
         this.comandaCookieService = comandaCookieService;
+        this.notaFiscalService = notaFiscalService;
     }
 
     public void criar(){
@@ -83,6 +86,7 @@ public class ComandaService {
         List<Comanda> cmds = comandaDAO.listar();
         int index = comandaDAO.buscarIndex(id);
         Comanda c = cmds.get(index);
+        notaFiscalService.gerarNotaFiscal(c);
         c.resetComanda();
         comandaDAO.salvar(cmds);
 
