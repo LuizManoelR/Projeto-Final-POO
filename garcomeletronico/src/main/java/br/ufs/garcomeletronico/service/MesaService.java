@@ -62,6 +62,11 @@ public class MesaService {
                       .toList();
 
     }
+    public List<Mesa> buscarMesas(){
+
+        return mesaDAO.listar();
+                      
+    }
 
 }
 

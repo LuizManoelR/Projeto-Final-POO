@@ -37,7 +37,7 @@ public class Produto implements Identificavel {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
-        this.categoria = ProdutoCategories.valueOf(categoria.toUpperCase());
+        this.categoria = ProdutoCategories.fromValue(categoria);
         this.img = img;
         this.preco = preco;
     }
@@ -52,7 +52,7 @@ public class Produto implements Identificavel {
 
     public void setNome(String nome){this.nome = nome;}
     public void setDescricao(String descricao){this.descricao = descricao;}
-    public void setCategoria(String categoria){this.categoria = ProdutoCategories.valueOf(categoria);}
+    public void setCategoria(String categoria){this.categoria = ProdutoCategories.fromValue(categoria);}
     public void setImg(String img){this.img = img;}
     public void setpreco(BigDecimal preco){this.preco = preco;}
 

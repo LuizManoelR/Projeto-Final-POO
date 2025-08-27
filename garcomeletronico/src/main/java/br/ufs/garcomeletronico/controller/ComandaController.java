@@ -77,11 +77,11 @@ public class ComandaController {
         comandaService.resetComanda(comandaId);
     }
     @PostMapping("/iniciar")
-    public void iniciar(HttpServletResponse response, HttpServletRequest request) {
+    public void iniciar(HttpServletResponse response) {
         System.out.println("Post recebido");
        
         comandaService.iniciar(response);
-        abrirComanda(request);
+    
     }
 
     @GetMapping("/id")

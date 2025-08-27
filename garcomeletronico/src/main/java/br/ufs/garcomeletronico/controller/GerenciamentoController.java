@@ -1,14 +1,17 @@
 package br.ufs.garcomeletronico.controller;
 
-import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import br.ufs.garcomeletronico.model.Carrinho;
 import br.ufs.garcomeletronico.service.CarrinhoCookieService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@Controller
+@RestController
+@RequestMapping("/api/gereciamento")
 public class GerenciamentoController {
 
     private final CarrinhoCookieService carrinhoCookieService;
@@ -26,13 +29,14 @@ public class GerenciamentoController {
         this.carrinhoCookieService = carrinhoCookieService;
     }
 
-    @PostMapping()
-    public void iniciar(HttpServletResponse response, HttpServletRequest request){
+    @PostMapping("/iniciar")
+    public void iniciar(HttpServletResponse response){
 
-       carrinhoController.iniciarCarrinho(mesaController.iniciar().getId(), response);
-       comandaController.iniciar(response, request);
+        comandaController.iniciar(response);
+        carrinhoController.iniciarCarrinho(mesaController.iniciar().getId(), response);
 
     }
+    @PostMapping("/resetar")
     public void reset(HttpServletResponse response, HttpServletRequest request){
         
         Carrinho carrinho = carrinhoCookieService.carregar(request);
@@ -41,7 +45,7 @@ public class GerenciamentoController {
 
         carrinhoCookieService.limpar(response);
         
-       comandaController.resetComanda(request, response);
+        comandaController.resetComanda(request, response);
 
     }
 

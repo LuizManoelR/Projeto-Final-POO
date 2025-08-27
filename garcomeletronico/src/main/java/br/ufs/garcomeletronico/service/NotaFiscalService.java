@@ -1,5 +1,7 @@
 package br.ufs.garcomeletronico.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import br.ufs.garcomeletronico.dao.NotaFiscalDAO;
@@ -21,6 +23,12 @@ public class NotaFiscalService {
     public void gerarNotaFiscal(Comanda comanda){
 
         notaFiscalDAO.adicionar(new NotaFiscal(comanda));
+
+    }
+
+    public List<NotaFiscal> notasFiscais(){
+
+        return notaFiscalDAO.listar();
 
     }
 

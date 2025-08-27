@@ -112,7 +112,7 @@ public class ComandaService {
                 System.err.println("Nenhuma comanda livre disponível.");
                 return; // ou lançar uma exceção
             }
-
+            livre.abrirComanda();
             comandaCookieService.salvar(response, livre.getId());
             System.out.println("Comanda iniciada: " + livre.getId());
 
