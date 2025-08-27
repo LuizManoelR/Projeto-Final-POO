@@ -6,11 +6,13 @@ import org.springframework.stereotype.Service;
 
 import br.ufs.garcomeletronico.dao.MesaDAO;
 import br.ufs.garcomeletronico.model.Mesa;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Service
 public class MesaService {
 
     private MesaDAO mesaDAO;
+    private CarrinhoCookieService carrinhoCookieService;
 
     public MesaService(){mesaDAO = new MesaDAO();}
     
@@ -38,6 +40,26 @@ public class MesaService {
         int index = mesaDAO.buscarIndex(id);
         Mesa m = mesas.get(index);
         m.mudarStatus();
+        mesaDAO.salvar(mesas);
+
+    }
+    public void chamarGarcom(HttpServletRequest request){
+
+        String id = carrinhoCookieService.carregar(request).getMesa().getId();
+
+        List<Mesa> mesas = mesaDAO.listar();
+        int index = mesaDAO.buscarIndex(id);
+        Mesa m = mesas.get(index);
+        m.chamouGarcom();
+        mesaDAO.salvar(mesas);
+
+    }
+    public void chamarGarcomReset(String id){
+
+        List<Mesa> mesas = mesaDAO.listar();
+        int index = mesaDAO.buscarIndex(id);
+        Mesa m = mesas.get(index);
+        m.resetarChamadaGarcom();
         mesaDAO.salvar(mesas);
 
     }
