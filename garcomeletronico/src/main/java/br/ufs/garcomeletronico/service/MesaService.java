@@ -14,7 +14,10 @@ public class MesaService {
     private MesaDAO mesaDAO;
     private CarrinhoCookieService carrinhoCookieService;
 
-    public MesaService(){mesaDAO = new MesaDAO();}
+    public MesaService(CarrinhoCookieService carrinhoCookieService){
+        mesaDAO = new MesaDAO();
+        this.carrinhoCookieService = carrinhoCookieService;
+    }
     
     public void criarMesa(){mesaDAO.adicionar(new Mesa());}
     
