@@ -5,10 +5,10 @@ import java.util.List;
 
 
 public class Pedido implements Identificavel{
-    private List<Item> itens;
-    private Mesa mesa;
     private String id;
+    private Mesa mesa;
     private PedidoStatus status;
+    private List<Item> itens;
     private static int ultimo = 1;
 
     public Pedido(List<Item> itens, Mesa mesa){

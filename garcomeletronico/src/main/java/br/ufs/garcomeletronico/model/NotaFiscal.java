@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class NotaFiscal implements Identificavel{
-    private Comanda comanda;
-    private LocalDateTime data;
-    private transient DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-    private String dataformatada;
     private String id;
+    private transient DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    private LocalDateTime data;
+    private String dataformatada;
+    private Comanda comanda;
     private static int ultimo = 1;
 
     public NotaFiscal(Comanda comanda){
