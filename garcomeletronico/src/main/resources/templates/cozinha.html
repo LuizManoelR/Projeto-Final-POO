@@ -1,26 +1,281 @@
-<main class="layout-cozinha">
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface da Cozinha - Garçom Eletrônico</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- <link th:href="@{/css/custom.css}" rel="stylesheet"> -->
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/}">
+                <i class="fas fa-utensils me-2"></i>
+                Cozinha - Garçom Eletrônico
+            </a>
+            <div class="navbar-nav ms-auto">
+                <span class="navbar-text me-3">
+                    <i class="fas fa-clock me-1"></i>
+                    <span th:text="${#dates.format(#dates.createNow(), 'HH:mm:ss')}">12:00:00</span>
+                </span>
+                <a th:href="@{/}" class="btn btn-outline-light btn-sm">
+                    <i class="fas fa-home me-1"></i>
+                    Início
+                </a>
+            </div>
+        </div>
+    </nav>
 
-    <section class="content-cozinha">
-        <h2>Pedidos em Andamento</h2>
+    <!-- Status Messages -->
+    <div th:if="${mensagem}" class="alert alert-info alert-dismissible fade show m-3" role="alert">
+        <i class="fas fa-info-circle me-2"></i>
+        <span th:text="${mensagem}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
 
-        <table class="pedidos">
-            <thead>
-                <tr>
-                    <th>Mesa</th>
-                    <th>Item</th>
-                    <th>Qtd</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="pedido : ${pedidos}">
-                    <td th:text="${pedido.mesa}">Mesa 002</td>
-                    <td th:text="${pedido.item.nome}">Produto</td>
-                    <td th:text="${pedido.quantidade}">1</td>
-                    <td th:text="${pedido.status}">Preparando</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
+    <!-- Main Content -->
+    <div class="container-fluid mt-4">
+        <!-- Dashboard Cards -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card bg-warning text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-clock fa-2x mb-2"></i>
+                        <h4 th:text="${pedidosPendentes != null ? pedidosPendentes.size() : 0}">0</h4>
+                        <p class="mb-0">Pedidos Pendentes</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-info text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-fire fa-2x mb-2"></i>
+                        <h4 th:text="${pedidosProducao != null ? pedidosProducao.size() : 0}">0</h4>
+                        <p class="mb-0">Em Produção</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-success text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-check-circle fa-2x mb-2"></i>
+                        <h4 th:text="${pedidosConcluidos != null ? pedidosConcluidos.size() : 0}">0</h4>
+                        <p class="mb-0">Concluídos</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-danger text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-bell fa-2x mb-2"></i>
+                        <h4 th:text="${chamadasGarcom != null ? chamadasGarcom.size() : 0}">0</h4>
+                        <p class="mb-0">Chamadas Garçom</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-</main>
+        <!-- Tabs Navigation -->
+        <ul class="nav nav-tabs" id="cozinhaTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" th:href="@{/cozinha}">
+                    <i class="fas fa-clipboard-list me-2"></i>
+                    Pedidos
+                </a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" th:href="@{/cozinha/garcom}">
+                    <i class="fas fa-bell me-2"></i>
+                    Chamadas de Garçom
+                </a>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content mt-4">
+            <!-- Pedidos Tab -->
+            <div class="tab-pane fade show active">
+                <div class="row">
+                    <!-- Pedidos Pendentes -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header bg-warning text-white">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-clock me-2"></i>
+                                    Pendentes
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div th:if="${pedidosPendentes != null and !pedidosPendentes.empty}">
+                                    <div class="mb-3" th:each="pedido : ${pedidosPendentes}">
+                                        <div class="border rounded p-3">
+                                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                                <h6 class="mb-0" th:text="'Pedido #' + ${pedido.id}">Pedido #1</h6>
+                                                <span class="badge bg-secondary" th:text="'Mesa ' + ${pedido.mesa.id}">Mesa 1</span>
+                                            </div>
+                                            
+                                            <div class="mb-2">
+                                                <small class="text-muted">Itens:</small>
+                                                <ul class="list-unstyled mb-2">
+                                                    <li th:each="item : ${pedido.itens}">
+                                                        <small th:text="${item.quantidade} + 'x ' + ${item.produto.nome}">1x Produto</small>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <strong th:text="'Total: R$ ' + ${#numbers.formatDecimal(pedido.total, 1, 2)}">Total: R$ 0,00</strong>
+                                                <small class="text-muted" th:text="${#dates.format(pedido.dataHora, 'HH:mm')}">12:00</small>
+                                            </div>
+                                            
+                                            <div class="btn-group w-100" role="group">
+                                                <form th:action="@{/cozinha/produzir}" method="post" style="display: inline;">
+                                                    <input type="hidden" name="pedidoId" th:value="${pedido.id}">
+                                                    <button class="btn btn-info btn-sm" type="submit">
+                                                        <i class="fas fa-fire me-1"></i>
+                                                        Iniciar Produção
+                                                    </button>
+                                                </form>
+                                                <form th:action="@{/cozinha/cancelar}" method="post" style="display: inline;">
+                                                    <input type="hidden" name="pedidoId" th:value="${pedido.id}">
+                                                    <button class="btn btn-danger btn-sm" type="submit">
+                                                        <i class="fas fa-times me-1"></i>
+                                                        Cancelar
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div th:if="${pedidosPendentes == null or pedidosPendentes.empty}">
+                                    <p class="text-muted text-center">Nenhum pedido pendente</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pedidos em Produção -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header bg-info text-white">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-fire me-2"></i>
+                                    Em Produção
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div th:if="${pedidosProducao != null and !pedidosProducao.empty}">
+                                    <div class="mb-3" th:each="pedido : ${pedidosProducao}">
+                                        <div class="border rounded p-3">
+                                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                                <h6 class="mb-0" th:text="'Pedido #' + ${pedido.id}">Pedido #1</h6>
+                                                <span class="badge bg-secondary" th:text="'Mesa ' + ${pedido.mesa.id}">Mesa 1</span>
+                                            </div>
+                                            
+                                            <div class="mb-2">
+                                                <small class="text-muted">Itens:</small>
+                                                <ul class="list-unstyled mb-2">
+                                                    <li th:each="item : ${pedido.itens}">
+                                                        <small th:text="${item.quantidade} + 'x ' + ${item.produto.nome}">1x Produto</small>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <strong th:text="'Total: R$ ' + ${#numbers.formatDecimal(pedido.total, 1, 2)}">Total: R$ 0,00</strong>
+                                                <small class="text-muted" th:text="${#dates.format(pedido.dataHora, 'HH:mm')}">12:00</small>
+                                            </div>
+                                            
+                                            <div class="btn-group w-100" role="group">
+                                                <form th:action="@{/cozinha/concluir}" method="post" style="display: inline;">
+                                                    <input type="hidden" name="pedidoId" th:value="${pedido.id}">
+                                                    <button class="btn btn-success btn-sm" type="submit">
+                                                        <i class="fas fa-check me-1"></i>
+                                                        Concluir
+                                                    </button>
+                                                </form>
+                                                <form th:action="@{/cozinha/cancelar}" method="post" style="display: inline;">
+                                                    <input type="hidden" name="pedidoId" th:value="${pedido.id}">
+                                                    <button class="btn btn-danger btn-sm" type="submit">
+                                                        <i class="fas fa-times me-1"></i>
+                                                        Cancelar
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div th:if="${pedidosProducao == null or pedidosProducao.empty}">
+                                    <p class="text-muted text-center">Nenhum pedido em produção</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pedidos Concluídos -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    Concluídos
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div th:if="${pedidosConcluidos != null and !pedidosConcluidos.empty}">
+                                    <div class="mb-3" th:each="pedido : ${pedidosConcluidos}">
+                                        <div class="border rounded p-3">
+                                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                                <h6 class="mb-0" th:text="'Pedido #' + ${pedido.id}">Pedido #1</h6>
+                                                <span class="badge bg-secondary" th:text="'Mesa ' + ${pedido.mesa.id}">Mesa 1</span>
+                                            </div>
+                                            
+                                            <div class="mb-2">
+                                                <small class="text-muted">Itens:</small>
+                                                <ul class="list-unstyled mb-2">
+                                                    <li th:each="item : ${pedido.itens}">
+                                                        <small th:text="${item.quantidade} + 'x ' + ${item.produto.nome}">1x Produto</small>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <strong th:text="'Total: R$ ' + ${#numbers.formatDecimal(pedido.total, 1, 2)}">Total: R$ 0,00</strong>
+                                                <small class="text-muted" th:text="${#dates.format(pedido.dataHora, 'HH:mm')}">12:00</small>
+                                            </div>
+                                            
+                                            <form th:action="@{/cozinha/coletar}" method="post">
+                                                <input type="hidden" name="pedidoId" th:value="${pedido.id}">
+                                                <button class="btn btn-primary btn-sm w-100" type="submit">
+                                                    <i class="fas fa-hand-holding me-1"></i>
+                                                    Coletado
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div th:if="${pedidosConcluidos == null or pedidosConcluidos.empty}">
+                                    <p class="text-muted text-center">Nenhum pedido concluído</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Refresh Button -->
+        <div class="text-center mt-4 mb-4">
+            <a th:href="@{/cozinha}" class="btn btn-primary">
+                <i class="fas fa-sync-alt me-2"></i>
+                Atualizar Dados
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

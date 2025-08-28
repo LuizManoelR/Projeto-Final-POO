@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garçom Eletrônico - Sistema de Restaurante</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- <link th:href="@{/css/custom.css}" rel="stylesheet"> -->
+</head>
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-utensils me-2"></i>
+                Garçom Eletrônico
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-primary text-white py-5">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-4">
+                <i class="fas fa-utensils me-3"></i>
+                Sistema de Restaurante Inteligente
+            </h1>
+            <p class="lead mb-5">
+                Gerencie pedidos, mesas e comandas de forma eficiente e moderna
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+        <div class="row g-4">
+            <!-- Interface do Cliente -->
+            <div class="col-md-6">
+                <div class="card h-100 border-0 shadow">
+                    <div class="card-body text-center p-5">
+                        <div class="text-primary mb-3">
+                            <i class="fas fa-user-friends fa-3x"></i>
+                        </div>
+                        <h3 class="card-title mb-3">Interface do Cliente</h3>
+                        <p class="card-text mb-4">
+                            Faça pedidos, visualize o cardápio, gerencie seu carrinho e chame o garçom quando necessário.
+                        </p>
+                        <a th:href="@{/cliente}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-arrow-right me-2"></i>
+                            Acessar como Cliente
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interface da Cozinha -->
+            <div class="col-md-6">
+                <div class="card h-100 border-0 shadow">
+                    <div class="card-body text-center p-5">
+                        <div class="text-success mb-3">
+                            <i class="fas fa-utensils fa-3x"></i>
+                        </div>
+                        <h3 class="card-title mb-3">Interface da Cozinha</h3>
+                        <p class="card-text mb-4">
+                            Gerencie pedidos, controle o status de produção e acompanhe as solicitações de garçom.
+                        </p>
+                        <a th:href="@{/cozinha}" class="btn btn-success btn-lg">
+                            <i class="fas fa-arrow-right me-2"></i>
+                            Acessar Cozinha
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="row mt-5 g-4">
+            <div class="col-12">
+                <h2 class="text-center mb-5">Funcionalidades do Sistema</h2>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="text-center">
+                    <i class="fas fa-shopping-cart fa-3x text-primary mb-3"></i>
+                    <h5>Gerenciamento de Carrinho</h5>
+                    <p>Adicione e remova produtos, visualize o total e finalize pedidos facilmente.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="text-center">
+                    <i class="fas fa-table fa-3x text-success mb-3"></i>
+                    <h5>Controle de Mesas</h5>
+                    <p>Sistema inteligente de alocação de mesas e chamadas de garçom.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="text-center">
+                    <i class="fas fa-clipboard-list fa-3x text-warning mb-3"></i>
+                    <h5>Gestão de Pedidos</h5>
+                    <p>Acompanhe o status dos pedidos desde a criação até a entrega.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container">
+            <p class="mb-0">
+                <i class="fas fa-code me-2"></i>
+                Sistema Garçom Eletrônico - Desenvolvido com Spring Boot e Thymeleaf
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

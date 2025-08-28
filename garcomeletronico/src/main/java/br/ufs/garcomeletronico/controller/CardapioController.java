@@ -15,6 +15,10 @@ public class CardapioController {
     private CardapioService cardapioService; // usado para acessar os métodos que retornam produtos
 
     // Endpoint para listar todos os produtos
+   @GetMapping
+    public List<Produto> listartodos() {
+        return cardapioService.listarProdutos();
+    }
    @GetMapping("/categoria/{categoria}")
     public List<Produto> listarPorCategoria(@PathVariable String categoria) {
         return switch (categoria.toLowerCase()) {

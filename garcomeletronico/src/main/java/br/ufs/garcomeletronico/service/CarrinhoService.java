@@ -1,6 +1,5 @@
 package br.ufs.garcomeletronico.service;
 
-import java.util.List;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -8,7 +7,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Service;
 
 import br.ufs.garcomeletronico.model.Carrinho;
-import br.ufs.garcomeletronico.model.Item;
 import br.ufs.garcomeletronico.model.Mesa;
 import br.ufs.garcomeletronico.model.Produto;
 
@@ -63,11 +61,11 @@ public class CarrinhoService {
 
     }
     
-    public List<Item> listar(HttpServletRequest request){
+    public Carrinho getCarrinho(HttpServletRequest request){
 
         Carrinho carrinho = carrinhoCookieService.carregar(request);
 
-        return carrinho.getCarrinho();
+        return carrinho;
 
     }
 

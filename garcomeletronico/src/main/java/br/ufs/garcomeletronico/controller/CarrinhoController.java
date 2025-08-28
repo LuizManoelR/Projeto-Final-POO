@@ -4,17 +4,17 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import java.util.List;
 
 import br.ufs.garcomeletronico.dao.MesaDAO;
 import br.ufs.garcomeletronico.dao.ProdutoDAO;
-import br.ufs.garcomeletronico.model.Item;
+import br.ufs.garcomeletronico.model.Carrinho;
 import br.ufs.garcomeletronico.model.Mesa;
 import br.ufs.garcomeletronico.model.Produto;
 import br.ufs.garcomeletronico.service.CarrinhoService;
@@ -49,8 +49,8 @@ public class CarrinhoController {
     }
 
     @GetMapping
-    public List<Item> listar(HttpServletRequest request) {
-    return carrinhoService.listar(request);
+    public Carrinho carrinho(HttpServletRequest request) {
+    return carrinhoService.getCarrinho(request);
     }
 
     @GetMapping("/valorTotal")
@@ -61,8 +61,8 @@ public class CarrinhoController {
     
 
     // Adiciona produto ao carrinho
-    @PostMapping("/adicionar/{produtoId}")
-    public void adicionarProduto(@PathVariable String produtoId,
+    @PostMapping("/adicionar")
+    public void adicionarProduto(@RequestParam String produtoId,
                                  HttpServletRequest request,
                                  HttpServletResponse response) {
         System.out.println("Post recebido");
@@ -73,8 +73,8 @@ public class CarrinhoController {
     }
 
     // Remove produto do carrinho
-    @DeleteMapping("/remover/{produtoId}")
-    public void removerProduto(@PathVariable String produtoId,
+    @DeleteMapping("/remover")
+    public void removerProduto(@RequestParam String produtoId,
                                HttpServletRequest request,
                                HttpServletResponse response) {
         ProdutoDAO produtoDAO = new ProdutoDAO();

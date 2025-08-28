@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Carrinho {
     // Atributo
     private List<Item> carrinho;
@@ -11,6 +14,16 @@ public class Carrinho {
     
     public Carrinho(Mesa mesa){
         this.carrinho = new ArrayList<>();
+        this.mesa = mesa;
+    }
+
+        // Construtor para Jackson
+    @JsonCreator
+    public Carrinho(
+        @JsonProperty("carrinho") List<Item> carrinho,
+        @JsonProperty("mesa") Mesa mesa
+    ) {
+        this.carrinho = carrinho != null ? carrinho : new ArrayList<>();
         this.mesa = mesa;
     }
 

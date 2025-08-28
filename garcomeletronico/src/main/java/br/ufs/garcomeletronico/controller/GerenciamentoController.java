@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
-@RequestMapping("/api/gereciamento")
+@RequestMapping("/api/gerenciamento")
 public class GerenciamentoController {
 
     private final CarrinhoCookieService carrinhoCookieService;

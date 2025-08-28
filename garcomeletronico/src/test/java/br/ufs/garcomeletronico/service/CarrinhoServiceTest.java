@@ -94,17 +94,17 @@ class CarrinhoServiceTest {
     }
     
     @Test
-    void deveListarItensDoCarrinho(){
+    void deveRetornarCarrinho(){
         Produto produto = new Produto("Café", "desc", "BEBIDA", BigDecimal.valueOf(2.5));
         Carrinho carrinho = new Carrinho(new Mesa());
         carrinho.add(produto);
     
                 when(carrinhoCookieService.carregar(request)).thenReturn(carrinho);
 
-        List<Item> itens = carrinhoService.listar(request);
+        Carrinho carrinho2 = carrinhoService.getCarrinho(request);
 
-        assertEquals(1, itens.size());
-        assertEquals(produto, itens.get(0).getProduto());
+        assertEquals(carrinho.getCarrinho(), carrinho2.getCarrinho());
+        assertEquals(produto,carrinho.getCarrinho().get(0).getProduto());
     }
 
     @Test

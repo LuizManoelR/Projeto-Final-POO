@@ -4,7 +4,7 @@
     "nome": "Água com gás 500 mL",
     "descricao": "Água mineral com gás, garrafa de 500 mL.",
     "categoria": "BEBIDA",
-    "img": "garcomeletronico/src/main/resources/static/img/produto20.png",
+    "img": "/img/produto20.png",
     "preco": 5.90
   },
   {
@@ -12,7 +12,7 @@
     "nome": "Batata frita com cheddar e bacon",
     "descricao": "Batatas fritas crocantes com cheddar e bacon.",
     "categoria": "ENTRADA",
-    "img": "garcomeletronico/src/main/resources/static/img/produto2.png",
+    "img": "/img/produto2.png",
     "preco": 19.50
   },
   {
@@ -20,7 +20,7 @@
     "nome": "Bruschetta",
     "descricao": "Pão tostado com tomate, alho e manjericão.",
     "categoria": "ENTRADA",
-    "img": "garcomeletronico/src/main/resources/static/img/produto5.png",
+    "img": "/img/produto5.png",
     "preco": 20.00
   },
   {
@@ -28,7 +28,7 @@
     "nome": "Café espresso 120 mL",
     "descricao": "Café espresso encorpado servido em dose individual de 120 mL.",
     "categoria": "BEBIDA",
-    "img": "garcomeletronico/src/main/resources/static/img/produto18.png",
+    "img": "/img/produto18.png",
     "preco": 8.50
   },
   {
@@ -36,7 +36,7 @@
     "nome": "Casquinha de pizza",
     "descricao": "Mini pizza servida em casquinha crocante.",
     "categoria": "ENTRADA",
-    "img": "garcomeletronico/src/main/resources/static/img/produto4.png",
+    "img": "/img/produto4.png",
     "preco": 20.00
   },
   {
@@ -44,7 +44,7 @@
     "nome": "Cheesecake",
     "descricao": "Torta cremosa de queijo com base crocante.",
     "categoria": "SOBREMESA",
-    "img": "garcomeletronico/src/main/resources/static/img/produto13.png",
+    "img": "/img/produto13.png",
     "preco": 18.00
   },
   {
@@ -52,7 +52,7 @@
     "nome": "Coca-Cola lata 350 mL",
     "descricao": "Refrigerante tradicional de cola em lata 350 mL.",
     "categoria": "BEBIDA",
-    "img": "garcomeletronico/src/main/resources/static/img/produto16.png",
+    "img": "/img/produto16.png",
     "preco": 7.00
   },
   {
@@ -60,7 +60,7 @@
     "nome": "Coca-Cola zero açúcar lata 350 mL",
     "descricao": "Versão zero açúcar do refrigerante Coca-Cola em lata 350 mL.",
     "categoria": "BEBIDA",
-    "img": "garcomeletronico/src/main/resources/static/img/produto17.png",
+    "img": "/img/produto17.png",
     "preco": 7.00
   },
   {
@@ -68,7 +68,7 @@
     "nome": "Croquetes de calabresa com queijo",
     "descricao": "Croquetes saborosos de calabresa toscana com queijo muçarela.",
     "categoria": "ENTRADA",
-    "img": "garcomeletronico/src/main/resources/static/img/produto1.png",
+    "img": "/img/produto1.png",
     "preco": 20.00
   },
   {
@@ -76,7 +76,7 @@
     "nome": "Espaguete a bolonhesa",
     "descricao": "Espaguete servido com molho bolonhesa tradicional.",
     "categoria": "PRATOPRINCIPAL",
-    "img": "garcomeletronico/src/main/resources/static/img/produto9.png",
+    "img": "/img/produto9.png",
     "preco": 31.00
   },
   {
@@ -84,7 +84,7 @@
     "nome": "Feijoada gourmet",
     "descricao": "Feijoada completa com arroz, farofa, torresmo e couve refogada.",
     "categoria": "PRATOPRINCIPAL",
-    "img": "garcomeletronico/src/main/resources/static/img/produto7.png",
+    "img": "/img/produto7.png",
     "preco": 29.50
   },
   {
@@ -92,7 +92,7 @@
     "nome": "Hambúrguer gourmet",
     "descricao": "Hambúrguer de 200g, pão na manteiga, salada, bacon e cebola caramelizada.",
     "categoria": "PRATOPRINCIPAL",
-    "img": "garcomeletronico/src/main/resources/static/img/produto6.png",
+    "img": "/img/produto6.png",
     "preco": 29.50
   },
   {
@@ -100,7 +100,7 @@
     "nome": "Jarra de suco de laranja",
     "descricao": "Suco de laranja natural servido em jarra.",
     "categoria": "BEBIDA",
-    "img": "garcomeletronico/src/main/resources/static/img/produto19.png",
+    "img": "/img/produto19.png",
     "preco": 12.00
   },
   {
@@ -108,7 +108,7 @@
     "nome": "Lasanha bolonhesa",
     "descricao": "Lasanha clássica de carne moída com molho bolonhesa e queijo.",
     "categoria": "PRATOPRINCIPAL",
-    "img": "garcomeletronico/src/main/resources/static/img/produto10.png",
+    "img": "/img/produto10.png",
     "preco": 31.00
   },
   {
@@ -116,7 +116,7 @@
     "nome": "Mousse de maracujá",
     "descricao": "Mousse leve e aerado de maracujá com cobertura de chocolate.",
     "categoria": "SOBREMESA",
-    "img": "garcomeletronico/src/main/resources/static/img/produto14.png",
+    "img": "/img/produto14.png",
     "preco": 15.00
   },
   {
@@ -124,7 +124,7 @@
     "nome": "Pavê tradicional",
     "descricao": "Sobremesa cremosa em camadas com biscoitos e chocolate.",
     "categoria": "SOBREMESA",
-    "img": "garcomeletronico/src/main/resources/static/img/produto15.png",
+    "img": "/img/produto15.png",
     "preco": 17.00
   },
   {
@@ -132,7 +132,7 @@
     "nome": "Petit gateau",
     "descricao": "Bolo de chocolate quente com recheio cremoso, servido com sorvete.",
     "categoria": "SOBREMESA",
-    "img": "garcomeletronico/src/main/resources/static/img/produto11.png",
+    "img": "/img/produto11.png",
     "preco": 19.00
   },
   {
@@ -140,7 +140,7 @@
     "nome": "Pizza individual pepperoni",
     "descricao": "Pizza individual com pepperoni e queijo muçarela.",
     "categoria": "PRATOPRINCIPAL",
-    "img": "garcomeletronico/src/main/resources/static/img/produto8.png",
+    "img": "/img/produto8.png",
     "preco": 31.00
   },
   {
@@ -148,7 +148,7 @@
     "nome": "Torta alemã",
     "descricao": "Sobremesa gelada de chocolate com biscoitos e creme.",
     "categoria": "SOBREMESA",
-    "img": "garcomeletronico/src/main/resources/static/img/produto12.png",
+    "img": "/img/produto12.png",
     "preco": 17.00
   },
   {
@@ -156,7 +156,7 @@
     "nome": "Tábua de queijos e torradas",
     "descricao": "Seleção de queijos variados acompanhados de torradas crocantes.",
     "categoria": "ENTRADA",
-    "img": "garcomeletronico/src/main/resources/static/img/produto3.png",
+    "img": "/img/produto3.png",
     "preco": 27.90
   }
 ]
